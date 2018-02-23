@@ -2,12 +2,13 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import store from "react-native-simple-store";
 import {StyleSheet, TouchableHighlight, TouchableWithoutFeedback, View} from "react-native";
-import {Container, Content, List, Text, Thumbnail} from "native-base";
+import {Container, Header, Content, Footer, FooterTab, Button, Text} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import RNRestart from 'react-native-restart';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        margin: 5
     },
     logo: {
         backgroundColor: '#FFFFFF',
@@ -71,6 +72,7 @@ class Drawer extends Component {
     componentDidMount() {
 
     }
+
     componentDidUpdate(prevProps, prevState) {
 
 
@@ -79,92 +81,24 @@ class Drawer extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.logo}>
-                    <Thumbnail large
-                               source={{uri: 'https://s3-us-west-2.amazonaws.com/scorestream-user-profile-pictures/userProfile_1012050_117122-4447-1ropiq4.png'}}/>
-                    <Text>{this.state.warehouse_name}</Text>
-                    <Text style={{fontWeight: 'bold'}}>Haloo</Text>
-                </View>
-                <Container style={{backgroundColor: '#29363d'}}>
-                    <Content>
-                        <List>
-                            <TouchableHighlight underlayColor="#607D8B" onPress={() => {
-                                this.onBack('OutGoingItems');
-                            }}>
-                                <View style={styles.vw}>
-                                    <View style={styles.icn}>
-                                        <Icon size={18} color={'#FFFFFF'} name={'arrow-circle-right'}/>
-                                    </View>
-                                    <View style={styles.txt}>
-                                        <Text style={styles.textColor}>Menu </Text>
-                                    </View>
-                                </View>
-                            </TouchableHighlight>
-                            <TouchableHighlight underlayColor="#607D8B" onPress={() => {
-                                this.onBack('InComingItems');
-                            }}>
-                                <View style={styles.vw}>
-                                    <View style={styles.icn}>
-                                        <Icon size={18} color={'#FFFFFF'} name={'arrow-circle-left'}/>
-                                    </View>
-                                    <View style={styles.txt}>
-                                        <Text style={styles.textColor}>Menu </Text>
-                                    </View>
-                                </View>
-                            </TouchableHighlight>
-                            <TouchableHighlight underlayColor="#607D8B" onPress={() => {
-                                this.onBack('MyApp');
-                            }}>
-                                <View style={styles.vw}>
-                                    <View style={styles.icn}>
-                                        <Icon size={18} color={'#FFFFFF'} name={'file-text-o'}/>
-                                    </View>
-                                    <View style={styles.txt}>
-                                        <Text style={styles.textColor}>Menu</Text>
-                                    </View>
-                                </View>
-                            </TouchableHighlight>
-                            <TouchableHighlight underlayColor="#607D8B" onPress={() => {
-                                this.onBack('InComingItems');
-                            }}>
-                                <View style={styles.vw}>
-                                    <View style={styles.icn}>
-                                        <Icon size={18} color={'#FFFFFF'} name={'credit-card'}/>
-                                    </View>
-                                    <View style={styles.txt}>
-                                        <Text style={styles.textColor}>Menu</Text>
-                                    </View>
-                                </View>
-                            </TouchableHighlight>
-
-                            <TouchableHighlight underlayColor="#607D8B" onPress={() => {
-                                this.onBack('Setting');
-                            }}>
-                                <View style={styles.vw}>
-                                    <View style={styles.icn}>
-                                        <Icon size={18} color={'#FFFFFF'} name={'cogs'}/>
-                                    </View>
-                                    <View style={styles.txt}>
-                                        <Text style={styles.textColor}>Menu</Text>
-                                    </View>
-                                </View>
-                            </TouchableHighlight>
-                            <TouchableHighlight underlayColor="#607D8B" onPress={() => {
-                                this.onLogOut()
-                            }}>
-                                <View style={styles.vw}>
-                                    <View style={styles.icn}>
-                                        <Icon size={18} color={'#FFFFFF'} name={'sign-out'}/>
-                                    </View>
-                                    <View style={styles.txt}>
-                                        <Text style={styles.textColor}>Menu </Text>
-                                    </View>
-                                </View>
-                            </TouchableHighlight>
-
-                        </List>
-                    </Content>
-                </Container>
+                <Content>
+                    <View>
+                        <Text>Lokasi</Text>
+                    </View>
+                    <View>
+                        <Text>Pengguna</Text>
+                    </View>
+                </Content>
+                <Footer>
+                    <FooterTab style={{backgroundColor:'#FFFFFF'}}>
+                        <Button bordered warning>
+                            <Text>setingan awal</Text>
+                        </Button>
+                        <Button bordered info>
+                            <Text>Terapkan</Text>
+                        </Button>
+                    </FooterTab>
+                </Footer>
             </View>
         )
     }

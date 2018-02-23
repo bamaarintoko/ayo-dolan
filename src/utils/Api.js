@@ -2,7 +2,8 @@ import axios from 'axios'
 import qs from 'qs'
 
 // const host      = "http://192.168.100.4/erp/public/api/";
-const host      = "http://erp.mlskoding.com/api/";
+// const host      = "http://erp.mlskoding.com/api/";
+const host      = "https://randomuser.me/api/";
 
 
 export default class Api {
@@ -27,9 +28,8 @@ export default class Api {
 
     static GET(end_point){
         const url = `${host}${end_point}`;
+        console.log(url)
         return axios.get(url)
-            .then(response=>{return response})
-            .catch(error=>{console.log(error)})
     }
     // }
 }
