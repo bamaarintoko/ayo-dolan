@@ -63,8 +63,8 @@ class HomePage extends Component {
         super(props);
         this.state = {
             data: [],
-            page : 2,
-            isRefresh:false
+            page: 2,
+            isRefresh: false
         }
         this.onLoad = this.onLoad.bind(this)
     }
@@ -86,10 +86,10 @@ class HomePage extends Component {
     onLoad() {
         console.log('halooo', this.state.data.length)
         if (this.state.data.length < 50) {
-            this.setState((prevstate,props)=>({
-                page:prevstate.page+1
+            this.setState((prevstate, props) => ({
+                page: prevstate.page + 1
             }))
-            Api.GET('?page='+this.state.page+'&results=10&').then((response) => {
+            Api.GET('?page=' + this.state.page + '&results=10&').then((response) => {
                 console.log("onLoad--->", response)
                 var joined = this.state.data.concat(response.data.results);
                 this.setState({
@@ -100,17 +100,19 @@ class HomePage extends Component {
             })
         }
     }
-    onRefresh(){
+
+    onRefresh() {
         Api.GET('?page=1&results=10&').then((response) => {
             console.log("--->", response)
             this.setState({
                 data: response.data.results,
-                isRefresh:false
+                isRefresh: false
             })
         }).catch(error => {
             console.log(error)
         })
     }
+
     render() {
         console.log("-->", this.state.data)
         return (
@@ -121,58 +123,57 @@ class HomePage extends Component {
                     rightPress={() => this.props.navigation.navigate('DetailMessage')}
                 />
                 <FlatList
-                    style={{backgroundColor:'#FFFFFF'}}
+                    style={{backgroundColor: '#E0E0E0'}}
                     data={this.state.data}
                     refreshing={this.state.isRefresh}
-                    onRefresh={()=>{this.onRefresh()}}
+                    onRefresh={() => {
+                        this.onRefresh()
+                    }}
                     renderItem={({item}) => (
-                        <View style={{
-                            flex: 1,
-                            flexDirection: 'column',
-                            padding: 5,
-                            marginTop: 5,
-                            marginLeft: 5,
-                            marginRight: 5,
-                            backgroundColor: '#FFFFFF'
-                        }}>
-                            <View style={styles.box_parent}>
-                                <View style={styles.box_child_image}>
-                                    <Image
-                                        style={{width: 100, height: 100}}
-                                        source={{uri: item.picture.large}}
-                                    />
-                                </View>
-                                <View style={styles.box_child_info}>
-                                    <Text style={{
-                                        fontSize: 12,
-                                        color: '#000000'
-                                    }}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>
-                                    <Text style={{fontSize: 12, color: '#000000'}}>Dari </Text>
-                                    <Text style={{fontSize: 12, color: '#000000'}}>Ke</Text>
-                                </View>
-                                <View style={{flex: 1, flexDirection: 'row'}}>
-                                    <View style={{flex: 1, alignItems: 'center'}}>
+                        <View>
+                            <View style={{
+                                flex: 1,
+                                flexDirection: 'column',
+                                padding: 10,
+                                marginTop: 2,
+                                backgroundColor: '#FFFFFF'
+                            }}>
 
+                                <View style={styles.box_parent}>
+                                    <View style={styles.box_child_image}>
+                                        <Image
+                                            style={{width: 150, height: 150}}
+                                            source={{uri: item.picture.large}}
+                                        />
                                     </View>
-                                    <View style={{flex: 1, alignItems: 'center', padding: 5}}>
-                                        <Text><Icon size={20} name="star-o" color="#FFEB3B"/></Text>
-                                        <Text>1k</Text>
+                                    <View style={styles.box_child_info}>
+                                        <View style={{height:120}}>
+                                            <Text style={{
+                                                fontSize: 16,
+                                                fontWeight: 'bold',
+                                                color: '#000000'
+                                            }}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>
+
+                                            <Text style={{fontSize: 12, color: '#000000', marginTop: 5}}>Siapa mau main
+                                                ke ...</Text>
+                                            <Text style={{fontSize: 12, color: '#000000', marginTop: 5}}>Kumpul di
+                                                ...</Text>
+                                        </View>
+                                        <View style={{flex: 1, flexDirection: 'row'}}>
+                                            <View style={{flex: 1}}>
+                                                <Text><Icon color={'#000000'} size={20}
+                                                            name="calendar-o"/></Text>
+                                            </View>
+                                            <View style={{flex: 1}}>
+                                                <Text><Icon color={'#000000'} size={20}
+                                                            name="clock-o"/></Text>
+                                            </View>
+                                        </View>
                                     </View>
-                                </View>
-                            </View>
-                            <View style={styles.box_child_footer}>
-                                <View style={styles.footer}>
-                                    <Text style={styles.text_footer}><Icon size={17} name="user-o"
-                                                                           color="#000000"/>{' '}0 dari 10</Text>
-                                </View>
-                                <View style={styles.footer}>
-                                    <Text style={styles.text_footer}><Icon size={17} name="calendar"
-                                                                           color="#000000"/>{' '}13 Maret
-                                        2018</Text>
-                                </View>
-                                <View style={styles.footer}>
-                                    <Text style={styles.text_footer}><Icon size={17} name="clock-o"
-                                                                           color="#000000"/>{' '}12:00</Text>
+                                    <View style={{flex: 1}}>
+                                        <Text style={{color: '#000000'}}>10{' '}<Icon color={'#4FC3F7'} size={20}
+                                                                                      name="user"/></Text>
+                                    </View>
                                 </View>
                             </View>
                         </View>
@@ -188,16 +189,17 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
     box_parent: {
-        height: 100,
+        height: 150,
         flex: 1, flexDirection: 'row',
     },
     box_child_image: {
         overflow: 'hidden',
-        height: 100, backgroundColor: '#FFFFFF', width: 100, borderTopLeftRadius: 5
+        height: 150, backgroundColor: '#FFFFFF', width: 150, borderRadius: 25
     },
     box_child_info: {
         marginLeft: 10,
-        flex: 3
+        flex: 5,
+        flexDirection: 'column'
     },
     box_child_footer: {
         height: 30, flex: 1, flexDirection: 'row', backgroundColor: '#E3F2FD', borderBottomLeftRadius: 5
@@ -206,7 +208,7 @@ const styles = StyleSheet.create({
         flex: 1, justifyContent: 'center', alignItems: 'center'
     },
     text_footer: {
-        paddingLeft: 5, fontSize: 12, color:'#000000'
+        paddingLeft: 5, fontSize: 12, color: '#000000'
     }
 });
 export default connect(

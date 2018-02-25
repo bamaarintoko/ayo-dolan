@@ -6,6 +6,7 @@ import {
     Text
 } from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Head from "../../Components/Head";
 function mapStateToProps(state) {
     return {
 
@@ -21,9 +22,13 @@ class ViewLocation extends Component {
       }
     render() {
         return (
-            <Content>
-                
-            </Content>
+            <Container>
+                <Head
+
+                    leftPress={() => this.props.navigation.navigate('DrawerOpen')}
+                    rightPress={() => this.props.navigation.navigate('DetailMessage')}
+                />
+            </Container>
         );
     }
 }
