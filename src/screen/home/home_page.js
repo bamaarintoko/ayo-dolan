@@ -147,7 +147,7 @@ class HomePage extends Component {
                                         />
                                     </View>
                                     <View style={styles.box_child_info}>
-                                        <View style={{height:120}}>
+                                        <View style={{height:100}}>
                                             <Text style={{
                                                 fontSize: 16,
                                                 fontWeight: 'bold',
@@ -170,7 +170,7 @@ class HomePage extends Component {
                                             </View>
                                         </View>
                                     </View>
-                                    <View style={{flex: 1}}>
+                                    <View style={{flex: 2}}>
                                         <Text style={{color: '#000000'}}>10{' '}<Icon color={'#4FC3F7'} size={20}
                                                                                       name="user"/></Text>
                                     </View>
@@ -189,16 +189,16 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
     box_parent: {
-        height: 150,
+        height: 120,
         flex: 1, flexDirection: 'row',
     },
     box_child_image: {
         overflow: 'hidden',
-        height: 150, backgroundColor: '#FFFFFF', width: 150, borderRadius: 25
+        height: 120, backgroundColor: '#FFFFFF', width: 120, borderRadius: 25
     },
     box_child_info: {
         marginLeft: 10,
-        flex: 5,
+        flex: 8,
         flexDirection: 'column'
     },
     box_child_footer: {
