@@ -1,6 +1,7 @@
 import timestampNow from 'performance-now'
 import React from 'react';
-import { PixelRatio } from 'react-native';
+import { PixelRatio,Dimensions} from 'react-native';
+const {width, height} = Dimensions.get('window');
 let pixelRatio = PixelRatio.get();
 
 export const normalize = (size) => {

@@ -14,7 +14,8 @@ import Head from '../../Components/Head'
 import axios from 'axios'
 import Api from '../../utils/Api'
 import Icon from 'react-native-vector-icons/FontAwesome';
-
+import {normalize, normalizeFont} from "../../utils/func";
+const {width, height} = require('Dimensions').get('window');
 function mapStateToProps(state) {
     return {};
 }
@@ -142,36 +143,36 @@ class HomePage extends Component {
                                 <View style={styles.box_parent}>
                                     <View style={styles.box_child_image}>
                                         <Image
-                                            style={{width: 150, height: 150}}
+                                            style={{width: normalize(135*.6), height: normalize(135*.6)}}
                                             source={{uri: item.picture.large}}
                                         />
                                     </View>
                                     <View style={styles.box_child_info}>
-                                        <View style={{height:100}}>
+                                        <View style={{height:normalize(115*.6)}}>
                                             <Text style={{
-                                                fontSize: 16,
+                                                fontSize: normalizeFont(3 * .7),
                                                 fontWeight: 'bold',
                                                 color: '#000000'
                                             }}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>
 
-                                            <Text style={{fontSize: 12, color: '#000000', marginTop: 5}}>Siapa mau main
+                                            <Text style={{fontSize: normalizeFont(2*.7), color: '#000000', marginTop: 5}}>Siapa mau main
                                                 ke ...</Text>
-                                            <Text style={{fontSize: 12, color: '#000000', marginTop: 5}}>Kumpul di
+                                            <Text style={{fontSize: normalizeFont(2*.7), color: '#000000', marginTop: 5}}>Kumpul di
                                                 ...</Text>
                                         </View>
                                         <View style={{flex: 1, flexDirection: 'row'}}>
                                             <View style={{flex: 1}}>
-                                                <Text><Icon color={'#000000'} size={20}
+                                                <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
                                                             name="calendar-o"/></Text>
                                             </View>
                                             <View style={{flex: 1}}>
-                                                <Text><Icon color={'#000000'} size={20}
+                                                <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
                                                             name="clock-o"/></Text>
                                             </View>
                                         </View>
                                     </View>
-                                    <View style={{flex: 2}}>
-                                        <Text style={{color: '#000000'}}>10{' '}<Icon color={'#4FC3F7'} size={20}
+                                    <View style={{flex: 2, paddingLeft:2}}>
+                                        <Text style={{color: '#000000', fontSize:normalizeFont(4 * .5)}}>10{' '}<Icon color={'#4FC3F7'} size={normalizeFont(4 * .7)}
                                                                                       name="user"/></Text>
                                     </View>
                                 </View>
@@ -189,12 +190,12 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
     box_parent: {
-        height: 120,
+        height: normalize(135*.6),
         flex: 1, flexDirection: 'row',
     },
     box_child_image: {
         overflow: 'hidden',
-        height: 120, backgroundColor: '#FFFFFF', width: 120, borderRadius: 25
+        height: normalize(135*.6), backgroundColor: '#FFFFFF', width: normalize(135*.6), borderRadius: normalizeFont(3 * .7)
     },
     box_child_info: {
         marginLeft: 10,
