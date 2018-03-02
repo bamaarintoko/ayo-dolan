@@ -12,6 +12,7 @@ import {
 } from "native-base";
 import Head from '../../Components/Head'
 import axios from 'axios'
+import io from 'socket.io-client'
 import Api from '../../utils/Api'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {normalize, normalizeFont} from "../../utils/func";
@@ -67,13 +68,33 @@ class HomePage extends Component {
             page: 2,
             isRefresh: false
         }
+        this.socket = io('http://192.168.242.2:3010', {
+            // const socket = io('http://192.168.43.72:3010', {
+            transports: ['websocket']
+        })
         this.onLoad = this.onLoad.bind(this)
     }
 
 
     componentDidMount() {
-        // console.log('asu')
-        console.log("--->")
+        console.log('asu',Math.floor(Math.random() * 2000)+1000)
+        this.socket.on('connect', () => {
+            console.log("socket connected")
+
+            this.socket.emit('online', Math.floor(Math.random() * 2000)+1000) //YOUR EVENT TO SERVER
+
+            // socket.on('EVENT YOU WANNA LISTEN', (r) => {
+            //
+            // })
+            //EVENT YOU WANNA LISTEN
+        })
+        this.socket.on('connect_error', (err) => {
+            console.log("--->",err)
+        })
+
+        this.socket.on('disconnect', () => {
+            console.log("Disconnected Socket!")
+        })
         Api.GET('?page=1&results=10&').then((response) => {
             console.log("--->", response)
             this.setState({

@@ -9,6 +9,7 @@ import {
 import {ListItem, Thumbnail} from 'native-base';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Head from "../../Components/Head";
+import {normalize, normalizeFont} from "../../utils/func";
 import _ from 'lodash'
 function mapStateToProps(state) {
     return {};
@@ -74,11 +75,11 @@ class ViewMessage extends Component {
                                             <Thumbnail source={{uri: item.people_photo}}/>
                                         </Left>
                                         <Body>
-                                        <Text>{item.people_name}</Text>
-                                        <Text note>Doing what you like will always keep you happy . .</Text>
+                                        <Text style={{fontSize:normalizeFont(3 * .7)}}>{item.people_name}</Text>
+                                        <Text style={{fontSize:normalizeFont(3 * .6)}} note>Doing what you like will always keep you happy . .</Text>
                                         </Body>
                                         <Right>
-                                            <Text note>3:43 pm</Text>
+                                            <Text style={{fontSize:normalizeFont(3 * .6)}} note>3:43 pm</Text>
                                         </Right>
                                     </ListItem>
                                 </TouchableWithoutFeedback>

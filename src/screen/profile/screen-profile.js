@@ -7,6 +7,7 @@ import {
 } from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {StyleSheet, View} from "react-native";
+import {normalize, normalizeFont} from "../../utils/func";
 function mapStateToProps(state) {
     return {
 
@@ -53,7 +54,7 @@ class ViewProfile extends Component {
                         backgroundColor: '#F0F0F0',padding:10, borderTopWidth:1,borderBottomWidth:1,
                         borderTopColor:'#E0E0E0',borderBottomColor:'#E0E0E0'
                     }} >
-                        <Text>Informasi</Text>
+                        <Text style={styles.font_middle}>Informasi</Text>
                     </View>
                     <View style={{flex:3, backgroundColor: '#FFFFFF'}} />
 
@@ -63,7 +64,7 @@ class ViewProfile extends Component {
 }
 const styles = StyleSheet.create({
     font_middle: {
-        fontSize: 14,
+        fontSize: normalizeFont(3 * .6),
     },
 });
 export default connect(
