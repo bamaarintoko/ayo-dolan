@@ -136,19 +136,18 @@ class HomePage extends Component {
                                 flex: 1,
                                 flexDirection: 'column',
                                 padding: 10,
-                                marginTop: 2,
+                                marginBottom:2,
                                 backgroundColor: '#FFFFFF'
                             }}>
-
                                 <View style={styles.box_parent}>
                                     <View style={styles.box_child_image}>
                                         <Image
-                                            style={{width: normalize(135*.6), height: normalize(135*.6)}}
+                                            style={{width: normalize(150*.6), height: normalize(150*.6)}}
                                             source={{uri: item.picture.large}}
                                         />
                                     </View>
                                     <View style={styles.box_child_info}>
-                                        <View style={{height:normalize(115*.6)}}>
+                                        <View style={{height:normalize(125*.6)}}>
                                             <Text style={{
                                                 fontSize: normalizeFont(3 * .7),
                                                 fontWeight: 'bold',
@@ -169,11 +168,11 @@ class HomePage extends Component {
                                                 <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
                                                             name="clock-o"/></Text>
                                             </View>
+                                            <View style={{flex: 1}}>
+                                                <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
+                                                            name="user"/></Text>
+                                            </View>
                                         </View>
-                                    </View>
-                                    <View style={{flex: 2, paddingLeft:2}}>
-                                        <Text style={{color: '#000000', fontSize:normalizeFont(4 * .5)}}>10{' '}<Icon color={'#4FC3F7'} size={normalizeFont(4 * .7)}
-                                                                                      name="user"/></Text>
                                     </View>
                                 </View>
                             </View>
@@ -190,12 +189,12 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
     box_parent: {
-        height: normalize(135*.6),
+        height: normalize(150*.6),
         flex: 1, flexDirection: 'row',
     },
     box_child_image: {
         overflow: 'hidden',
-        height: normalize(135*.6), backgroundColor: '#FFFFFF', width: normalize(135*.6), borderRadius: normalizeFont(3 * .7)
+        height: normalize(150*.6), backgroundColor: '#FFFFFF', width: normalize(150*.6), borderRadius: normalizeFont(3 * .7)
     },
     box_child_info: {
         marginLeft: 10,

@@ -27,7 +27,7 @@ class screen_splash extends Component {
         }
     }
 
-    componentWillMount() {
+    componentDidMount() {
 
         setTimeout(() => {
             this.props.navigation.dispatch({ type: 'HOME' });

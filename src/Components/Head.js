@@ -11,7 +11,7 @@ const Head = ({leftPress, bodyPress, rightPress, leftIcon, body}) => {
     console.log("--->", typeof body)
     return (
         <Header androidStatusBarColor="#4FC3F7"
-                style={{backgroundColor: '#4FC3F7', borderBottomWidth: 1, borderBottomColor: '#BEBEBE'}}>
+                style={{backgroundColor: '#FFFFFF', borderBottomWidth: 1, borderBottomColor: '#BEBEBE'}}>
             <Left style={{flex: 1}}>
                 <Button full transparent onPress={leftPress}>
                     <Icon size={20} name={leftIcon} color="#29363d"/>
