@@ -17,19 +17,8 @@ class ViewDetailMessage extends Component {
             userId: null
         }
         this.socket = io('http://192.168.242.2:3010', {
-            // const socket = io('http://192.168.43.72:3010', {
             transports: ['websocket']
         })
-        this.socket.on('tes', (d) => {
-            console.log("halooo",d)
-            //this.socket.emit('online', this.props.redGetUserId.data)
-        })
-        // this.onSetMessage = this.onSetMessage.bind(this)
-        // this.socket.on('message_', function(data) {
-        //     console.log('Incoming message---->', data);
-        //     //this.onSetMessage(data)
-        //
-        // });
 
         this.renderBubble = this.renderBubble.bind(this)
         this.onSetMessage = this.onSetMessage.bind(this)
@@ -37,18 +26,7 @@ class ViewDetailMessage extends Component {
         this.socket.on('message_',this.onSetMessage)
     }
 
-    //
-    // componentDidUpdate(prevProps, prevState) {
-    //     this.socket.on('message_', function(data) {
-    //         console.log('Incoming message cdup---->', data);
-    //         this.onSetMessage(data)
-    //
-    //     });
-    // }
-
     onSetMessage(data){
-        // console.log(data)
-        console.log("--->",data)
         this._storeMessages(data)
     }
     _storeMessages(messages){
@@ -62,28 +40,14 @@ class ViewDetailMessage extends Component {
     componentDidMount() {
         console.log("--->", this.props.redGetUserId.data)
         this.socket.on('connect', () => {
-            //console.log("socket connected",this.socket)
             this.socket.emit('online', this.props.redGetUserId.data)
         })
         this.socket.emit('room', room);
-        // this.socket.on('message_', function(data) {
-        //     console.log('Incoming message:', data);
-        //     this.onSetMessage(data)
-        // });
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)
         })
-
         this.socket.on('disconnect', () => {
             console.log("Disconnected Socket!")
-        })
-
-        this.socket.on('reply'+this.props.redGetUserId.data, (d) => {
-            console.log("--->",d)
-            this.setState(previousState => ({
-                messages: GiftedChat.append(previousState.messages, d),
-            }))
-            //this.socket.emit('online', this.props.redGetUserId.data)
         })
         this.setState({
             messages: [
@@ -179,7 +143,7 @@ class ViewDetailMessage extends Component {
     render() {
         const {params} = this.props.navigation.state
         let user = {_id: this.state.userId || -1};
-        //console.log(this.state.messages)
+        console.log(this.state.messages)
         return (
             <Container>
                 <Head
@@ -192,7 +156,9 @@ class ViewDetailMessage extends Component {
                     renderBubble={this.renderBubble}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
-                    user={user}
+                    user={{
+                        _id : this.props.redGetUserId.data
+                    }}
                 />
             </Container>
         );
