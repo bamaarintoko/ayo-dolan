@@ -4,6 +4,7 @@ import {redAuth,redLogError} from './authReducers'
 import {redPass} from './passwordReducers'
 import {redWarehouseIn,redUpdateWarehouseIn,redDetailWarehouseIn} from './warehouseInReducers'
 import {redWarehouseOut,redUpdateWarehouseOut} from './warehouseOutReducers'
+import {redGetUserId} from './userReducers'
 // import { reducer as form } from 'redux-form'
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     redWarehouseOut:redWarehouseOut,
     redUpdateWarehouseOut:redUpdateWarehouseOut,
     redDetailWarehouseIn:redDetailWarehouseIn,
+    redGetUserId:redGetUserId,
     redLogError:redLogError
 })
 

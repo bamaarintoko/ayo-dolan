@@ -16,7 +16,7 @@ import Spinner from 'react-native-spinkit'
 import store from 'react-native-simple-store';
 
 import { actSplashLogin } from '../login/action'
-
+import {actGetUserId} from './action'
 import Logo from '../../utils/assetss/logo.png'
 class screen_splash extends Component {
     constructor(props) {
@@ -28,7 +28,20 @@ class screen_splash extends Component {
     }
 
     componentDidMount() {
-
+        console.log('asu')
+        store.get('user_id')
+            .then((res) =>{
+                console.log(res)
+                if (res === null){
+                    let generateUserId = Math.floor(Math.random() * 2000)+1000;
+                    store.push('user_id', generateUserId)
+                    this.props.dispatch(actGetUserId(generateUserId))
+                } else {
+                    this.props.dispatch(actGetUserId(res[0]))
+                    console.log("------->",res[0]) // 'Blurry Face'
+                }
+            }
+            )
         setTimeout(() => {
             this.props.navigation.dispatch({ type: 'HOME' });
         }, 3000)

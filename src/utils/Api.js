@@ -28,7 +28,7 @@ export default class Api {
 
     static GET(end_point){
         const url = `${host}${end_point}`;
-        console.log(url)
+        // console.log(url)
         return axios.get(url)
     }
     // }

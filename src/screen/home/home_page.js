@@ -16,9 +16,14 @@ import io from 'socket.io-client'
 import Api from '../../utils/Api'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {normalize, normalizeFont} from "../../utils/func";
+import store from "react-native-simple-store";
+
 const {width, height} = require('Dimensions').get('window');
+
 function mapStateToProps(state) {
-    return {};
+    return {
+        redGetUserId: state.redGetUserId
+    };
 }
 
 const home = [
@@ -76,27 +81,29 @@ class HomePage extends Component {
     }
 
 
+    componentDidUpdate(prevProps, prevState) {
+
+    }
+
+
     componentDidMount() {
-        console.log('asu',Math.floor(Math.random() * 2000)+1000)
+
         this.socket.on('connect', () => {
             console.log("socket connected")
-
-            this.socket.emit('online', Math.floor(Math.random() * 2000)+1000) //YOUR EVENT TO SERVER
-
-            // socket.on('EVENT YOU WANNA LISTEN', (r) => {
-            //
-            // })
-            //EVENT YOU WANNA LISTEN
+            this.socket.emit('online', this.props.redGetUserId.data)
         })
+        console.log("--->", this.socket)
+
+
         this.socket.on('connect_error', (err) => {
-            console.log("--->",err)
+            console.log("--->", err)
         })
 
         this.socket.on('disconnect', () => {
             console.log("Disconnected Socket!")
         })
         Api.GET('?page=1&results=10&').then((response) => {
-            console.log("--->", response)
+            //console.log("--->", response)
             this.setState({
                 data: response.data.results
             })
@@ -106,13 +113,13 @@ class HomePage extends Component {
     }
 
     onLoad() {
-        console.log('halooo', this.state.data.length)
+        // console.log('halooo', this.state.data.length)
         if (this.state.data.length < 50) {
             this.setState((prevstate, props) => ({
                 page: prevstate.page + 1
             }))
             Api.GET('?page=' + this.state.page + '&results=10&').then((response) => {
-                console.log("onLoad--->", response)
+                // console.log("onLoad--->", response)
                 var joined = this.state.data.concat(response.data.results);
                 this.setState({
                     data: joined
@@ -125,7 +132,7 @@ class HomePage extends Component {
 
     onRefresh() {
         Api.GET('?page=1&results=10&').then((response) => {
-            console.log("--->", response)
+            //console.log("--->", response)
             this.setState({
                 data: response.data.results,
                 isRefresh: false
@@ -136,7 +143,7 @@ class HomePage extends Component {
     }
 
     render() {
-        console.log("-->", this.state.data)
+        //console.log("-->", this.state.data)
         return (
             <Container>
                 <Head
@@ -157,27 +164,35 @@ class HomePage extends Component {
                                 flex: 1,
                                 flexDirection: 'column',
                                 padding: 10,
-                                marginBottom:2,
+                                marginBottom: 2,
                                 backgroundColor: '#FFFFFF'
                             }}>
                                 <View style={styles.box_parent}>
                                     <View style={styles.box_child_image}>
                                         <Image
-                                            style={{width: normalize(150*.6), height: normalize(150*.6)}}
+                                            style={{width: normalize(150 * .6), height: normalize(150 * .6)}}
                                             source={{uri: item.picture.large}}
                                         />
                                     </View>
                                     <View style={styles.box_child_info}>
-                                        <View style={{height:normalize(125*.6)}}>
+                                        <View style={{height: normalize(125 * .6)}}>
                                             <Text style={{
                                                 fontSize: normalizeFont(3 * .7),
                                                 fontWeight: 'bold',
                                                 color: '#000000'
                                             }}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>
 
-                                            <Text style={{fontSize: normalizeFont(2*.7), color: '#000000', marginTop: 5}}>Siapa mau main
+                                            <Text style={{
+                                                fontSize: normalizeFont(2 * .7),
+                                                color: '#000000',
+                                                marginTop: 5
+                                            }}>Siapa mau main
                                                 ke ...</Text>
-                                            <Text style={{fontSize: normalizeFont(2*.7), color: '#000000', marginTop: 5}}>Kumpul di
+                                            <Text style={{
+                                                fontSize: normalizeFont(2 * .7),
+                                                color: '#000000',
+                                                marginTop: 5
+                                            }}>Kumpul di
                                                 ...</Text>
                                         </View>
                                         <View style={{flex: 1, flexDirection: 'row'}}>
@@ -210,12 +225,15 @@ class HomePage extends Component {
 
 const styles = StyleSheet.create({
     box_parent: {
-        height: normalize(150*.6),
+        height: normalize(150 * .6),
         flex: 1, flexDirection: 'row',
     },
     box_child_image: {
         overflow: 'hidden',
-        height: normalize(150*.6), backgroundColor: '#FFFFFF', width: normalize(150*.6), borderRadius: normalizeFont(3 * .7)
+        height: normalize(150 * .6),
+        backgroundColor: '#FFFFFF',
+        width: normalize(150 * .6),
+        borderRadius: normalizeFont(3 * .7)
     },
     box_child_info: {
         marginLeft: 10,

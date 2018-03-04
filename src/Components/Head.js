@@ -6,15 +6,15 @@ import {
 } from "native-base";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Image} from "react-native";
-
+import {normalize, normalizeFont} from "../utils/func";
 const Head = ({leftPress, bodyPress, rightPress, leftIcon, body}) => {
-    console.log("--->", typeof body)
+    // console.log("--->", typeof body)
     return (
         <Header androidStatusBarColor="#4FC3F7"
                 style={{backgroundColor: '#FFFFFF', borderBottomWidth: 1, borderBottomColor: '#BEBEBE'}}>
             <Left style={{flex: 1}}>
                 <Button full transparent onPress={leftPress}>
-                    <Icon size={20} name={leftIcon} color="#29363d"/>
+                    <Icon size={normalizeFont(4*.6)} name={leftIcon} color="#29363d"/>
                 </Button>
             </Left>
             <Body style={{flex: 6, justifyContent: 'center', alignItems: 'center'}}>
@@ -25,7 +25,7 @@ const Head = ({leftPress, bodyPress, rightPress, leftIcon, body}) => {
                 &&
                 <Image
                     resizeMode={'contain'}
-                    style={{width:100}}
+                    style={{width:normalize(110*.6)}}
                     source={require('../utils/assetss/header.png')}
                 />
             }
