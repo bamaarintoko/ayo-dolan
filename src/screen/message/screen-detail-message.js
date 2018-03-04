@@ -23,6 +23,9 @@ class ViewDetailMessage extends Component {
             console.log("halooo",d)
             //this.socket.emit('online', this.props.redGetUserId.data)
         })
+        this.socket.on('message_', function(data) {
+            console.log('Incoming message:', data);
+        });
         this.renderBubble = this.renderBubble.bind(this)
     }
 
@@ -31,14 +34,15 @@ class ViewDetailMessage extends Component {
         this.socket.on('connect', () => {
             //console.log("socket connected",this.socket)
             this.socket.emit('online', this.props.redGetUserId.data)
-            this.socket.emit('room', room);
         })
-        this.socket.on('connect_error', (err) => {
-            console.log("--->", err)
-        })
+        this.socket.emit('room', room);
         this.socket.on('message_', function(data) {
             console.log('Incoming message:', data);
         });
+        this.socket.on('connect_error', (err) => {
+            console.log("--->", err)
+        })
+
         this.socket.on('disconnect', () => {
             console.log("Disconnected Socket!")
         })
@@ -123,6 +127,8 @@ class ViewDetailMessage extends Component {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages),
         }))
+
+
         this.socket.emit('message', messages) //YOUR EVENT TO SERVER
 
         // socket.on('EVENT YOU WANNA LISTEN', (r) => {
