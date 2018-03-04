@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 import {Bubble, GiftedChat} from 'react-native-gifted-chat'
 import store from "react-native-simple-store";
 
-let room = "abc123";
+let room = "1903";
 
 class ViewDetailMessage extends Component {
     constructor(props) {
@@ -24,11 +24,20 @@ class ViewDetailMessage extends Component {
             //this.socket.emit('online', this.props.redGetUserId.data)
         })
         this.socket.on('message_', function(data) {
-            console.log('Incoming message:', data);
+            console.log('Incoming message---->', data);
+            //this.onSetMessage(data)
+
         });
+
         this.renderBubble = this.renderBubble.bind(this)
+        //this.onSetMessage = this.onSetMessage.bind(this)
     }
 
+    onSetMessage(data){
+        // this.setState({
+        //     message:data
+        // })
+    }
     componentDidMount() {
         console.log("--->", this.props.redGetUserId.data)
         this.socket.on('connect', () => {
@@ -36,9 +45,9 @@ class ViewDetailMessage extends Component {
             this.socket.emit('online', this.props.redGetUserId.data)
         })
         this.socket.emit('room', room);
-        this.socket.on('message_', function(data) {
-            console.log('Incoming message:', data);
-        });
+        // this.socket.on('message_', function(data) {
+        //     console.log('Incoming message:', data);
+        // });
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)
         })
