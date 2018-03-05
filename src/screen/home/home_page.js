@@ -92,8 +92,10 @@ class HomePage extends Component {
             console.log("socket connected")
             this.socket.emit('online', this.props.redGetUserId.data)
         })
-        console.log("--->", this.socket)
-
+        console.log("--->", this.socket.id)
+        this.socket.emit('init', {
+            senderId: this.props.redGetUserId.data,
+        });
 
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)

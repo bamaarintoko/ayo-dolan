@@ -7,7 +7,7 @@ import io from 'socket.io-client'
 import {Bubble, GiftedChat} from 'react-native-gifted-chat'
 import store from "react-native-simple-store";
 
-let room = "1903";
+// let room = "1903";
 
 class ViewDetailMessage extends Component {
     constructor(props) {
@@ -20,6 +20,17 @@ class ViewDetailMessage extends Component {
             transports: ['websocket']
         })
 
+        this.socket.on('message', (message) => {
+            console.log(message)
+            this.onSetMessage(message)
+            // const newMessage = {
+            //     createdAt: message.createdAt,
+            //     text: message.text,
+            //     userId: message.senderId,
+            //     _id: message.msgId,
+            // };
+            /* sending message function */
+        });
         this.renderBubble = this.renderBubble.bind(this)
         this.onSetMessage = this.onSetMessage.bind(this)
         this._storeMessages = this._storeMessages.bind(this)
@@ -27,7 +38,8 @@ class ViewDetailMessage extends Component {
     }
 
     onSetMessage(data){
-        this._storeMessages(data)
+        console.log(data.text)
+        this._storeMessages(data.text)
     }
     _storeMessages(messages){
         this.setState((previousState) => {
@@ -38,17 +50,21 @@ class ViewDetailMessage extends Component {
     }
 
     componentDidMount() {
-        console.log("--->", this.props.redGetUserId.data)
-        this.socket.on('connect', () => {
-            this.socket.emit('online', this.props.redGetUserId.data)
-        })
-        this.socket.emit('room', room);
-        this.socket.on('connect_error', (err) => {
-            console.log("--->", err)
-        })
-        this.socket.on('disconnect', () => {
-            console.log("Disconnected Socket!")
-        })
+        console.log("--->", this.props.navigation.state.params.id)
+        console.log("--->", this.socket.id)
+        // this.socket.on('connect', () => {
+        //     this.socket.emit('online', this.props.redGetUserId.data)
+        // })
+        this.socket.emit('init', {
+            senderId: this.props.redGetUserId.data,
+        });
+        this.socket.emit('room', this.props.navigation.state.params.id);
+        // this.socket.on('connect_error', (err) => {
+        //     console.log("--->", err)
+        // })
+        // this.socket.on('disconnect', () => {
+        //     console.log("Disconnected Socket!")
+        // })
         this.setState({
             messages: [
                 // {
@@ -123,21 +139,28 @@ class ViewDetailMessage extends Component {
             messages: GiftedChat.append(previousState.messages, messages),
         }))
 
-
-        this.socket.emit('message', messages) //YOUR EVENT TO SERVER
-
-        // socket.on('EVENT YOU WANNA LISTEN', (r) => {
+        this.socket.emit('message', {
+            //conversationId: conversation.id,
+            text: messages,
+            senderId: this.props.redGetUserId.data,
+            receiverId: this.props.navigation.state.params.id,
+            //createdAt: new Date(),
+            //msgId: message[0]._id,
+        });
+        // this.socket.emit('message', messages) //YOUR EVENT TO SERVER
         //
+        // // socket.on('EVENT YOU WANNA LISTEN', (r) => {
+        // //
+        // // })
+        // //EVENT YOU WANNA LISTEN
+        //
+        // this.socket.on('connect_error', (err) => {
+        //     console.log("--->", err)
         // })
-        //EVENT YOU WANNA LISTEN
-
-        this.socket.on('connect_error', (err) => {
-            console.log("--->", err)
-        })
-
-        this.socket.on('disconnect', () => {
-            console.log("Disconnected Socket!")
-        })
+        //
+        // this.socket.on('disconnect', () => {
+        //     console.log("Disconnected Socket!")
+        // })
     }
 
     render() {
