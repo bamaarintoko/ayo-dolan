@@ -11,6 +11,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import Head from "../../Components/Head";
 import {normalize, normalizeFont} from "../../utils/func";
 import _ from 'lodash'
+import io from "socket.io-client";
 function mapStateToProps(state) {
     return {redGetUserId: state.redGetUserId};
 }
@@ -40,6 +41,16 @@ class ViewMessage extends Component {
             return <Icon name="comments-o" size={20} color={tintColor}/>;
         }
     }
+
+    constructor(props) {
+        super(props);
+        this.socket = io('http://192.168.242.2:3010', {
+            transports: ['websocket']
+        })
+
+
+    }
+
 
     onBack(key,img,id) {
         // setTimeout(() => {

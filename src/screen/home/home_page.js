@@ -28,26 +28,34 @@ function mapStateToProps(state) {
 
 const home = [
     {
-        key: '0',
+        user_id:'1383',
         people_name: 'Jennifer J. Brown',
         people_photo: 'https://randomuser.me/api/portraits/women/80.jpg'
     },
     {
-        key: '1',
+        user_id:'1903',
         people_name: 'Isabelle Chadwick',
         people_photo: 'https://randomuser.me/api/portraits/women/17.jpg'
     },
     {
+        user_id:'1482',
+        people_name: 'Elline Chadwick',
+        people_photo: 'https://randomuser.me/api/portraits/women/16.jpg'
+    },
+    {
+        user_id:'1582',
         key: '2',
         people_name: 'Abigail Booth',
         people_photo: 'https://randomuser.me/api/portraits/women/26.jpg'
     },
     {
+        user_id:'1682',
         key: '3',
         people_name: 'Harvey Reynolds',
         people_photo: 'https://randomuser.me/api/portraits/men/66.jpg'
     },
     {
+        user_id:'1782',
         key: '4',
         people_name: 'Alice Whittaker',
         people_photo: 'https://randomuser.me/api/portraits/women/79.jpg'
@@ -77,6 +85,9 @@ class HomePage extends Component {
             // const socket = io('http://192.168.43.72:3010', {
             transports: ['websocket']
         })
+        this.socket.on('online_user', (data) => {
+            console.log("online user",data)
+        });
         this.onLoad = this.onLoad.bind(this)
     }
 
@@ -89,13 +100,14 @@ class HomePage extends Component {
     componentDidMount() {
 
         this.socket.on('connect', () => {
-            console.log("socket connected")
-            this.socket.emit('online', this.props.redGetUserId.data)
+            // console.log("socket connected")
+            this.socket.emit('online', {myId:this.props.redGetUserId.data,friendId:['1383','1903','1482','1582']})
         })
-        console.log("--->", this.socket.id)
-        this.socket.emit('init', {
-            senderId: this.props.redGetUserId.data,
-        });
+        this.socket.emit('online_user', {myId:this.props.redGetUserId.data,friendId:['1383','1903','1482','1582']})
+        // console.log("--->", this.socket.id)
+        // this.socket.emit('init', {
+        //     senderId: this.props.redGetUserId.data,
+        // });
 
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)

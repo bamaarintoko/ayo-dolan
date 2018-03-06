@@ -23,18 +23,11 @@ class ViewDetailMessage extends Component {
         this.socket.on('message', (message) => {
 
             if (this.props.navigation.state.params.id === message.senderId.toString()){
-                console.log("con", message.senderId)
-                console.log("con",this.props.navigation.state.params.id)
+                //console.log("con", message.senderId)
+                //console.log("con",this.props.navigation.state.params.id)
                 this.onSetMessage(message)
 
             }
-            // const newMessage = {
-            //     createdAt: message.createdAt,
-            //     text: message.text,
-            //     userId: message.senderId,
-            //     _id: message.msgId,
-            // };
-            /* sending message function */
         });
         this.renderBubble = this.renderBubble.bind(this)
         this.onSetMessage = this.onSetMessage.bind(this)
@@ -43,7 +36,7 @@ class ViewDetailMessage extends Component {
     }
 
     onSetMessage(data){
-        console.log(data.text)
+        // console.log(data.text)
         this._storeMessages(data.text)
     }
     _storeMessages(messages){
@@ -55,76 +48,11 @@ class ViewDetailMessage extends Component {
     }
 
     componentDidMount() {
-        console.log("--->", this.props.navigation.state.params.id)
-        // console.log("--->", this.socket.id)
-        // this.socket.on('connect', () => {
-        //     this.socket.emit('online', this.props.redGetUserId.data)
-        // })
         this.socket.emit('init', {
             senderId: this.props.redGetUserId.data,
             receiverId: this.props.navigation.state.params.id,
         });
         this.socket.emit('room', this.props.navigation.state.params.id);
-        // this.socket.on('connect_error', (err) => {
-        //     console.log("--->", err)
-        // })
-        // this.socket.on('disconnect', () => {
-        //     console.log("Disconnected Socket!")
-        // })
-        this.setState({
-            messages: [
-                // {
-                //     _id: 1,
-                //     text: 'Jadi pergi gak?',
-                //     createdAt: new Date(),
-                //     user: {
-                //         _id: this.props.redGetUserId.data,
-                //         name: 'React Native',
-                //         avatar: this.props.navigation.state.params.image,
-                //     },
-                // },
-                // {
-                //     _id: 2,
-                //     text: 'Jadi pergi gak?',
-                //     createdAt: new Date(),
-                //     user: {
-                //         _id: this.props.redGetUserId.data,
-                //         name: 'React Native',
-                //         avatar: this.props.navigation.state.params.image,
-                //     },
-                // },
-                // {
-                //     _id: 3,
-                //     text: 'oke',
-                //     createdAt: new Date(),
-                //     user: {
-                //         _id: this.props.redGetUserId.data,
-                //         name: 'React Native',
-                //         avatar: this.props.navigation.state.params.image,
-                //     },
-                // },
-                // {
-                //     _id: 4,
-                //     text: 'oke',
-                //     createdAt: new Date(),
-                //     user: {
-                //         _id: 1,
-                //         name: 'React Native',
-                //         avatar: this.props.navigation.state.params.image,
-                //     },
-                // },
-                // {
-                //     _id: 5,
-                //     text: 'okeeeee',
-                //     createdAt: new Date(),
-                //     user: {
-                //         _id: 1,
-                //         name: 'React Native',
-                //         avatar: this.props.navigation.state.params.image,
-                //     },
-                // },
-            ],
-        })
     }
 
     renderBubble(props) {
@@ -146,33 +74,15 @@ class ViewDetailMessage extends Component {
         }))
 
         this.socket.emit('message', {
-            //conversationId: conversation.id,
             text: messages,
             senderId: this.props.redGetUserId.data,
             receiverId: this.props.navigation.state.params.id,
-            //createdAt: new Date(),
-            //msgId: message[0]._id,
         });
-        // this.socket.emit('message', messages) //YOUR EVENT TO SERVER
-        //
-        // // socket.on('EVENT YOU WANNA LISTEN', (r) => {
-        // //
-        // // })
-        // //EVENT YOU WANNA LISTEN
-        //
-        // this.socket.on('connect_error', (err) => {
-        //     console.log("--->", err)
-        // })
-        //
-        // this.socket.on('disconnect', () => {
-        //     console.log("Disconnected Socket!")
-        // })
     }
 
     render() {
         const {params} = this.props.navigation.state
         let user = {_id: this.state.userId || -1};
-        // console.log(this.state.messages)
         return (
             <Container>
                 <Head
