@@ -21,8 +21,13 @@ class ViewDetailMessage extends Component {
         })
 
         this.socket.on('message', (message) => {
-            console.log(message)
-            this.onSetMessage(message)
+
+            if (this.props.navigation.state.params.id === message.senderId.toString()){
+                console.log("con", message.senderId)
+                console.log("con",this.props.navigation.state.params.id)
+                this.onSetMessage(message)
+
+            }
             // const newMessage = {
             //     createdAt: message.createdAt,
             //     text: message.text,
@@ -51,12 +56,13 @@ class ViewDetailMessage extends Component {
 
     componentDidMount() {
         console.log("--->", this.props.navigation.state.params.id)
-        console.log("--->", this.socket.id)
+        // console.log("--->", this.socket.id)
         // this.socket.on('connect', () => {
         //     this.socket.emit('online', this.props.redGetUserId.data)
         // })
         this.socket.emit('init', {
             senderId: this.props.redGetUserId.data,
+            receiverId: this.props.navigation.state.params.id,
         });
         this.socket.emit('room', this.props.navigation.state.params.id);
         // this.socket.on('connect_error', (err) => {
@@ -166,7 +172,7 @@ class ViewDetailMessage extends Component {
     render() {
         const {params} = this.props.navigation.state
         let user = {_id: this.state.userId || -1};
-        console.log(this.state.messages)
+        // console.log(this.state.messages)
         return (
             <Container>
                 <Head

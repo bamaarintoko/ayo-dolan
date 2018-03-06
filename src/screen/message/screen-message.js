@@ -26,6 +26,11 @@ const home = [
         people_name: 'Isabelle Chadwick',
         people_photo: 'https://randomuser.me/api/portraits/women/17.jpg'
     },
+    {
+        user_id:'1482',
+        people_name: 'Elline Chadwick',
+        people_photo: 'https://randomuser.me/api/portraits/women/16.jpg'
+    },
 ]
 
 class ViewMessage extends Component {
