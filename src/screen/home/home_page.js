@@ -101,9 +101,9 @@ class HomePage extends Component {
 
         this.socket.on('connect', () => {
             // console.log("socket connected")
-            this.socket.emit('online', {myId:this.props.redGetUserId.data,friendId:['1383','1903','1482','1582']})
+            this.socket.emit('online', {myId:this.props.redGetUserId.data,friendId:['1903','1383','1482']})
         })
-        this.socket.emit('online_user', {myId:this.props.redGetUserId.data,friendId:['1383','1903','1482','1582']})
+        this.socket.emit('online_user', {myId:this.props.redGetUserId.data,friendId:['1903','1383','1482']})
         // console.log("--->", this.socket.id)
         // this.socket.emit('init', {
         //     senderId: this.props.redGetUserId.data,
