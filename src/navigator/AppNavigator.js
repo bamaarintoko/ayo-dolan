@@ -9,7 +9,7 @@ import ViewDetailMessage from '../screen/message/screen-detail-message'
 // import screenAdd from '../screen/home/screen_add'
 // import screenDetail from '../screen/detail/screen_detail'
 // import screenAddDet from '../screen/detail/screen_add_det'
-// import LoginScreen from '../screen/login/Login'
+import LoginScreen from '../screen/login/Login'
 // import screen_parent from '../screen/warehouse_bill/screen_parent'
 // import {Setting, ChangePassword, EditWarehouse} from '../screen/setting'
 // import {InComingItems, Test, OutGoingItems,DetailOutGoingItems,DetailIncomingItems} from '../screen/warehouse'
@@ -67,7 +67,7 @@ const sideBar = DrawerNavigator({
 
 export const AppNavigator = StackNavigator({
     Splash: {screen: screenSplash},
-    // Login: {screen: LoginScreen},
+    Login: {screen: LoginScreen},
     // // Menu: {screen: AppDrawer},
     Menu: {screen: sideBar},
     // Add: {screen: screenAdd},

@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {normalize, normalizeFont} from "../../utils/func";
 import store from "react-native-simple-store";
 
+
 const {width, height} = require('Dimensions').get('window');
 
 function mapStateToProps(state) {
