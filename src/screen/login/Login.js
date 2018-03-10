@@ -8,6 +8,34 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 // import Modal from 'react-native-modal';
 // import Spinner from 'react-native-spinkit';
 import md5 from 'crypto-js/md5';
+import Swiper from 'react-native-swiper'
+let styles = {
+    wrapper: {
+    },
+    slide1: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#9DD6EB'
+    },
+    slide2: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#97CAE5'
+    },
+    slide3: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#92BBD9'
+    },
+    text: {
+        color: '#fff',
+        fontSize: 30,
+        fontWeight: 'bold'
+    }
+};
 
 class Login extends Component {
     constructor(props) {
@@ -22,43 +50,21 @@ class Login extends Component {
     render() {
         // console.log("RNRestart.Restart();", isLoading)
         return (
-            <View style={styles.container}>
-
-            </View>
+            <Swiper style={styles.wrapper} showsButtons>
+                <View style={styles.slide1}>
+                    <Text style={styles.text}>Hello Swiper</Text>
+                </View>
+                <View style={styles.slide2}>
+                    <Text style={styles.text}>Beautiful</Text>
+                </View>
+                <View style={styles.slide3}>
+                    <Text style={styles.text}>And simple</Text>
+                </View>
+            </Swiper>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        padding: 20,
-        backgroundColor: '#FFFFFF',
-    },
-    welcome: {
-        fontSize: 20,
-        textAlign: 'center',
-        margin: 10,
-    },
-    instructions: {
-        textAlign: 'center',
-        color: '#333333',
-        marginBottom: 5,
-    },
-    modalContent: {
-        //backgroundColor: 'white',
-        padding: 30,
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: 4,
-        borderColor: 'rgba(0, 0, 0, 0.1)',
-    },
-    fullWidthButton: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-});
 
 
 function mapStateToProps(state) {
