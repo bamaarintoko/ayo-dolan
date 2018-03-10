@@ -43,7 +43,7 @@ class screen_splash extends Component {
             }
             )
         setTimeout(() => {
-            this.props.navigation.dispatch({ type: 'Login' });
+            this.props.navigation.dispatch({ type: 'HOME' });
         }, 3000)
     }
 

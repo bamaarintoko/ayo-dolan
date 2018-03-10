@@ -17,7 +17,7 @@ import Api from '../../utils/Api'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {normalize, normalizeFont} from "../../utils/func";
 import store from "react-native-simple-store";
-
+import Collapsible from 'react-native-collapsible-header';
 
 const {width, height} = require('Dimensions').get('window');
 
@@ -158,81 +158,88 @@ class HomePage extends Component {
     }
 
     render() {
-        //console.log("-->", this.state.data)
         return (
             <Container>
-                <Head
-                    leftIcon={'filter'}
-                    leftPress={() => this.props.navigation.navigate('DrawerOpen')}
-                    rightPress={() => this.props.navigation.navigate('DetailMessage')}
-                />
-                <FlatList
-                    style={{backgroundColor: '#E0E0E0'}}
-                    data={this.state.data}
-                    refreshing={this.state.isRefresh}
-                    onRefresh={() => {
-                        this.onRefresh()
-                    }}
-                    renderItem={({item}) => (
-                        <View>
-                            <View style={{
-                                flex: 1,
-                                flexDirection: 'column',
-                                padding: 10,
-                                marginBottom: 2,
-                                backgroundColor: '#FFFFFF'
-                            }}>
-                                <View style={styles.box_parent}>
-                                    <View style={styles.box_child_image}>
-                                        <Image
-                                            style={{width: normalize(150 * .6), height: normalize(150 * .6)}}
-                                            source={{uri: item.picture.large}}
-                                        />
-                                    </View>
-                                    <View style={styles.box_child_info}>
-                                        <View style={{height: normalize(125 * .6)}}>
-                                            <Text style={{
-                                                fontSize: normalizeFont(3 * .7),
-                                                fontWeight: 'bold',
-                                                color: '#000000'
-                                            }}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>
+                <Collapsible
+                    backgroundColor="#4FC3F7"
+                    max={55}
+                    renderHeader={<Head
+                        leftIcon={'filter'}
+                        leftPress={() => this.props.navigation.navigate('DrawerOpen')}
+                        rightPress={() => this.props.navigation.navigate('DetailMessage')}
+                    />}
+                    renderContent={
+                        <FlatList
+                            style={{backgroundColor: '#E0E0E0', marginTop:2}}
+                            data={this.state.data}
+                            refreshing={this.state.isRefresh}
+                            onRefresh={() => {
+                                this.onRefresh()
+                            }}
+                            renderItem={({item}) => (
+                                <View>
+                                    <View style={{
+                                        flex: 1,
+                                        flexDirection: 'column',
+                                        padding: 10,
+                                        marginBottom: 2,
+                                        backgroundColor: '#FFFFFF'
+                                    }}>
+                                        <View style={styles.box_parent}>
+                                            <View style={styles.box_child_image}>
+                                                <Image
+                                                    style={{width: normalize(150 * .6), height: normalize(150 * .6)}}
+                                                    source={{uri: item.picture.large}}
+                                                />
+                                            </View>
+                                            <View style={styles.box_child_info}>
+                                                <View style={{height: normalize(125 * .6)}}>
+                                                    <Text style={{
+                                                        fontSize: normalizeFont(3 * .7),
+                                                        fontWeight: 'bold',
+                                                        color: '#000000'
+                                                    }}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>
 
-                                            <Text style={{
-                                                fontSize: normalizeFont(2 * .7),
-                                                color: '#000000',
-                                                marginTop: 5
-                                            }}>Siapa mau main
-                                                ke ...</Text>
-                                            <Text style={{
-                                                fontSize: normalizeFont(2 * .7),
-                                                color: '#000000',
-                                                marginTop: 5
-                                            }}>Kumpul di
-                                                ...</Text>
-                                        </View>
-                                        <View style={{flex: 1, flexDirection: 'row'}}>
-                                            <View style={{flex: 1}}>
-                                                <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
-                                                            name="calendar-o"/></Text>
-                                            </View>
-                                            <View style={{flex: 1}}>
-                                                <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
-                                                            name="clock-o"/></Text>
-                                            </View>
-                                            <View style={{flex: 1}}>
-                                                <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
-                                                            name="user"/></Text>
+                                                    <Text style={{
+                                                        fontSize: normalizeFont(2 * .7),
+                                                        color: '#000000',
+                                                        marginTop: 5
+                                                    }}>Siapa mau main
+                                                        ke ...</Text>
+                                                    <Text style={{
+                                                        fontSize: normalizeFont(2 * .7),
+                                                        color: '#000000',
+                                                        marginTop: 5
+                                                    }}>Kumpul di
+                                                        ...</Text>
+                                                </View>
+                                                <View style={{flex: 1, flexDirection: 'row'}}>
+                                                    <View style={{flex: 1}}>
+                                                        <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
+                                                                    name="calendar-o"/></Text>
+                                                    </View>
+                                                    <View style={{flex: 1}}>
+                                                        <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
+                                                                    name="clock-o"/></Text>
+                                                    </View>
+                                                    <View style={{flex: 1}}>
+                                                        <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
+                                                                    name="user"/></Text>
+                                                    </View>
+                                                </View>
                                             </View>
                                         </View>
                                     </View>
                                 </View>
-                            </View>
-                        </View>
-                    )}
-                    keyExtractor={(item, index) => '' + index}
-                    onEndReached={this.onLoad}
-                    onEndReachedThreshold={1}
+                            )}
+                            keyExtractor={(item, index) => '' + index}
+                            onEndReached={this.onLoad}
+                            onEndReachedThreshold={1}
+                        />
+                    }
                 />
+
+
             </Container>
         );
     }

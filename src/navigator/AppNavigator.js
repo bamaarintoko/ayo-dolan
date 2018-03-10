@@ -40,7 +40,6 @@ const MyApp = TabNavigator({
     tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled:false,
-    lazy: true,
     tabBarOptions: {
         lazy: true,
         showIcon: true,
