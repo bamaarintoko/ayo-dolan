@@ -10,9 +10,9 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import md5 from 'crypto-js/md5';
 import Swiper from 'react-native-swiper'
 import {normalize, normalizeFont} from "../../utils/func";
+
 let styles = {
-    wrapper: {
-    },
+    wrapper: {},
     slide1: {
         flex: 1,
         justifyContent: 'center',
@@ -27,7 +27,7 @@ let styles = {
     },
     slide3: {
         flex: 1,
-        flexDirection:'column',
+        flexDirection: 'column',
         backgroundColor: '#FFFFFF'
     },
     text: {
@@ -48,7 +48,8 @@ let styles = {
     },
     separatorOr: {
         color: '#9B9FA4',
-        marginHorizontal: 8
+        marginHorizontal: 8,
+        fontSize:normalizeFont(4 * .5)
     },
 };
 
@@ -73,47 +74,62 @@ class Login extends Component {
                     <Text style={styles.text}>Beautiful</Text>
                 </View>
                 <View style={styles.slide3}>
-                    <View style={{flex:1, backgroundColor:'#FFFFFF', alignItems:'center', justifyContent:'center'}}>
+                    <View style={{flex: 1, backgroundColor: '#FFFFFF', alignItems: 'center', justifyContent: 'center'}}>
                         <Image
                             resizeMode={'contain'}
-                            style={{width:normalize(130*.9)}}
+                            style={{width: normalize(130 * .9)}}
                             source={require('../../utils/assetss/header.png')}
                         />
                     </View>
-                    <View style={{flex:1.5, paddingLeft:30, paddingRight:30}}>
+                    <View style={{flex: 1.5, paddingLeft: 30, paddingRight: 30}}>
                         <Item rounded>
-                            <View style={{width:25}}>
-                            <Icon style={{paddingLeft:10}} size={normalizeFont(4*.5)} active name='envelope' />
+                            <View style={{width: 25}}>
+                                <Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active name='envelope'/>
                             </View>
-                            <Input style={{height:40, fontSize:normalizeFont(4*.5)}} placeholder='Email'/>
+                            <Input style={{height: 40, fontSize: normalizeFont(4 * .5)}} placeholder='Email'/>
                         </Item>
-                        <Item style={{marginTop:10}} rounded>
-                            <View style={{width:25, alignItems:'center'}}>
-                            <Icon style={{paddingLeft:10}} size={normalizeFont(4*.5)} active name='lock' />
+                        <Item style={{marginTop: 10}} rounded>
+                            <View style={{width: 25, alignItems: 'center'}}>
+                                <Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active name='lock'/>
                             </View>
-                            <Input style={{height:40, fontSize:normalizeFont(4*.5)}} placeholder='Password'/>
+                            <Input style={{height: 40, fontSize: normalizeFont(4 * .5)}} placeholder='Password'/>
                         </Item>
-                        <Button style={{marginTop:10}} small block info>
+                        <View style={{flex: 0.7, flexDirection: 'row', alignItems: 'center'}}>
+                            <View style={{flex: 1}}>
+                                <Text style={{fontSize: normalizeFont(4 * .5)}}>Create Account</Text>
+                            </View>
+                            <View style={{flex: 1, alignItems:'flex-end'}}>
+                                <Text style={{fontSize: normalizeFont(4 * .5)}}>Forgot Password?</Text>
+                            </View>
+                        </View>
+                        <Button small block info>
                             <Text>Login</Text>
                         </Button>
                         <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
-                            <View style={styles.separatorLine} />
-                            <Text style={styles.separatorOr}>{'Or'}</Text>
-                            <View style={styles.separatorLine} />
+                            <View style={styles.separatorLine}/>
+                            <Text style={styles.separatorOr}>Or Login With</Text>
+                            <View style={styles.separatorLine}/>
                         </View>
-                        <Button style={{marginTop:5, backgroundColor:'#3b5998'}} small block info>
-                            <Text><Icon style={{paddingLeft:10}} size={normalizeFont(4*.5)} active name='facebook' />{'    '}Facebook Login</Text>
-                        </Button>
-                        <Button style={{marginTop:10, backgroundColor:'#d34836'}} small block info>
-                            <Text><Icon style={{paddingLeft:10}} size={normalizeFont(4*.5)} active name='google' />{'    '}Gmail Login</Text>
-                        </Button>
+                        <View style={{flex: 1, flexDirection: 'row'}}>
+                            <View style={{flex: 1}}>
+                                <Button style={{marginTop: 2, backgroundColor: '#3b5998'}} small block info>
+                                    <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
+                                                name='facebook'/></Text>
+                                </Button>
+                            </View>
+                            <View style={{flex: 1}}>
+                                <Button style={{marginTop: 2, backgroundColor: '#d34836'}} small block info>
+                                    <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
+                                                name='google'/></Text>
+                                </Button>
+                            </View>
+                        </View>
                     </View>
                 </View>
             </Swiper>
         );
     }
 }
-
 
 
 function mapStateToProps(state) {
