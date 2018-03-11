@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 // import Spinner from 'react-native-spinkit';
 import md5 from 'crypto-js/md5';
 import Swiper from 'react-native-swiper'
+import {FBLogin, FBLoginManager} from 'react-native-facebook-login';
 import {normalize, normalizeFont} from "../../utils/func";
 import {Alert} from "react-native";
 let styles = {
@@ -63,6 +64,7 @@ class Login extends Component {
     }
 
     render() {
+        var _this = this;
         // console.log("RNRestart.Restart();", isLoading)
         return (
             <Swiper style={styles.wrapper} loop={false}>
@@ -111,10 +113,44 @@ class Login extends Component {
                         </View>
                         <View style={{flex: 1, flexDirection: 'row'}}>
                             <View style={{flex: 1}}>
-                                <Button style={{marginTop: 2, backgroundColor: '#3b5998'}} small block info>
-                                    <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
-                                                name='facebook'/></Text>
-                                </Button>
+                                <FBLogin style={{ marginBottom: 10, }}
+                                         ref={(fbLogin) => { this.fbLogin = fbLogin }}
+                                         permissions={["email","user_friends"]}
+                                         loginBehavior={FBLoginManager.LoginBehaviors.Native}
+                                         onLogin={function(data){
+                                             console.log("Logged in!");
+                                             console.log(data);
+                                             _this.setState({ user : data.credentials });
+                                         }}
+                                         onLogout={function(){
+                                             console.log("Logged out.");
+                                             _this.setState({ user : null });
+                                         }}
+                                         onLoginFound={function(data){
+                                             console.log("Existing login found.");
+                                             console.log(data);
+                                             _this.setState({ user : data.credentials });
+                                         }}
+                                         onLoginNotFound={function(){
+                                             console.log("No user logged in.");
+                                             _this.setState({ user : null });
+                                         }}
+                                         onError={function(data){
+                                             console.log("ERROR");
+                                             console.log(data);
+                                         }}
+                                         onCancel={function(){
+                                             console.log("User cancelled.");
+                                         }}
+                                         onPermissionsMissing={function(data){
+                                             console.log("Check permissions!");
+                                             console.log(data);
+                                         }}
+                                />
+                                {/*<Button style={{marginTop: 2, backgroundColor: '#3b5998'}} small block info>*/}
+                                    {/*<Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active*/}
+                                                {/*name='facebook'/></Text>*/}
+                                {/*</Button>*/}
                             </View>
                             <View style={{flex: 1}}>
                                 <Button style={{marginTop: 2, backgroundColor: '#d34836'}} small block info>
