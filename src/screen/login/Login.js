@@ -10,7 +10,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import md5 from 'crypto-js/md5';
 import Swiper from 'react-native-swiper'
 import {normalize, normalizeFont} from "../../utils/func";
-
+import {Alert} from "react-native";
 let styles = {
     wrapper: {},
     slide1: {
@@ -58,7 +58,6 @@ class Login extends Component {
         super(props);
         this.state = {}
     }
-
     componentDidMount() {
 
     }
