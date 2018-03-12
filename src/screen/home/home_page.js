@@ -160,15 +160,11 @@ class HomePage extends Component {
     render() {
         return (
             <Container>
-                <Collapsible
-                    backgroundColor="#4FC3F7"
-                    max={55}
-                    renderHeader={<Head
-                        leftIcon={'filter'}
-                        leftPress={() => this.props.navigation.navigate('DrawerOpen')}
-                        rightPress={() => this.props.navigation.navigate('DetailMessage')}
-                    />}
-                    renderContent={
+                <Head
+                    leftIcon={'filter'}
+                    leftPress={() => this.props.navigation.navigate('DrawerOpen')}
+                    rightPress={() => this.props.navigation.navigate('DetailMessage')}
+                />
                         <FlatList
                             style={{backgroundColor: '#E0E0E0', marginTop:2}}
                             data={this.state.data}
@@ -236,8 +232,6 @@ class HomePage extends Component {
                             onEndReached={this.onLoad}
                             onEndReachedThreshold={1}
                         />
-                    }
-                />
 
 
             </Container>

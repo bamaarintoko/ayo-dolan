@@ -17,6 +17,7 @@ import store from 'react-native-simple-store';
 
 import { actSplashLogin } from '../login/action'
 import {actGetUserId} from './action'
+
 import Logo from '../../utils/assetss/logo.png'
 class screen_splash extends Component {
     constructor(props) {
@@ -43,7 +44,7 @@ class screen_splash extends Component {
             }
             )
         setTimeout(() => {
-            this.props.navigation.dispatch({ type: 'Login' });
+            this.props.navigation.dispatch({ type: 'HOME' });
         }, 3000)
     }
 
