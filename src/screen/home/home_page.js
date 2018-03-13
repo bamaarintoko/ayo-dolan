@@ -24,7 +24,8 @@ const {width, height} = require('Dimensions').get('window');
 
 function mapStateToProps(state) {
     return {
-        redGetUserId: state.redGetUserId
+        redGetUserId: state.redGetUserId,
+        redGetDataPeople:state.redGetDataPeople
     };
 }
 
@@ -81,7 +82,9 @@ class HomePage extends Component {
         this.state = {
             data: [],
             page: 2,
-            isRefresh: false
+            isRefresh: false,
+            initialRedGetDataPeople:true,
+
         }
         this.socket = io('http://192.168.242.2:3010', {
             // const socket = io('http://192.168.43.72:3010', {
@@ -95,43 +98,33 @@ class HomePage extends Component {
 
 
     componentDidUpdate(prevProps, prevState) {
-
+        // console.log(this.props.redGetDataPeople)
+        if (this.props.redGetDataPeople.status === prevState.initialRedGetDataPeople){
+            this.setState({
+                data:this.props.redGetDataPeople.data
+            })
+            this.props.dispatch({
+                type:'GET_DATA_PEOPLE_REFRESH'
+            })
+        }
     }
 
 
     componentDidMount() {
-
         this.socket.on('connect', () => {
-            // console.log("socket connected")
             this.socket.emit('online', {myId:this.props.redGetUserId.data,friendId:['1903','1383','1482']})
         })
         this.socket.emit('online_user', {myId:this.props.redGetUserId.data,friendId:['1903','1383','1482']})
-        // console.log("--->", this.socket.id)
-        // this.socket.emit('init', {
-        //     senderId: this.props.redGetUserId.data,
-        // });
-
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)
         })
-
         this.socket.on('disconnect', () => {
             console.log("Disconnected Socket!")
         })
-        Api.GET('?page=1&results=10&').then((response) => {
-            //console.log("--->", response)
-            this.setState({
-                data: response.data.results
-            })
-        }).catch(error => {
-            console.log(error)
-        })
-
         this.props.dispatch(actGetPeople())
     }
 
     onLoad() {
-        // console.log('halooo', this.state.data.length)
         if (this.state.data.length < 50) {
             this.setState((prevstate, props) => ({
                 page: prevstate.page + 1

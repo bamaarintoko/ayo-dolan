@@ -1,0 +1,2 @@
+export const GET_DATA_PEOPLE            = 'GET_DATA_PEOPLE';
+export const GET_DATA_PEOPLE_REFRESH    = 'GET_DATA_PEOPLE_REFRESH';
