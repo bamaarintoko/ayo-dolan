@@ -18,6 +18,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {normalize, normalizeFont} from "../../utils/func";
 import store from "react-native-simple-store";
 import Collapsible from 'react-native-collapsible-header';
+import {actGetPeople} from "./action";
 
 const {width, height} = require('Dimensions').get('window');
 
@@ -125,6 +126,8 @@ class HomePage extends Component {
         }).catch(error => {
             console.log(error)
         })
+
+        this.props.dispatch(actGetPeople())
     }
 
     onLoad() {
