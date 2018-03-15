@@ -17,3 +17,14 @@ export function redGetUserId(state = initialGetUserId, action){
         default : return state
     }
 }
+
+export const rehydrated = (state = false , action) => {
+    // console.log(action.type)
+    switch (action.type) {
+        case "persist/REHYDRATE" :
+            return true;
+            // break;
+        default:
+            return state;
+    }
+}

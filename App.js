@@ -15,20 +15,23 @@ import {
 } from 'react-native';
 import { connect, Provider } from 'react-redux';
 import { createStore } from 'redux';
-import configureStore from './src/store/configureStore'
+import { PersistGate } from 'redux-persist/integration/react'
+import {store,persistor} from './src/store/configureStore'
 import AppWithNavigationState from './src/navigator/AppNavigator';
 
 type Props = {};
 export default class App extends Component<Props> {
-	store = configureStore();
+
 	constructor(props) {
 		super(props);		
 	}
 	
 	render() {
 		return (
-			<Provider store={this.store}>
+			<Provider store={store}>
+				<PersistGate loading={null} persistor={persistor}>
 				<AppWithNavigationState />
+				</PersistGate>
 			</Provider>
 		);
 	}
