@@ -29,7 +29,7 @@ class screen_splash extends Component {
     }
 
     componentDidMount() {
-        console.log('asu', this.props.redAuthCredential)
+        console.log('asu', JSON.parse(this.props.redAuthCredential.data))
         store.get('user_id')
             .then((res) =>{
                 console.log(res)

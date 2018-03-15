@@ -11,7 +11,7 @@ const initialAuthCredential = {
     message:""
 }
 export function redAuthCredential(state = initialAuthCredential, action) {
-    console.log(action.type)
+    // console.log(action.type)
     switch (action.type){
         case 'LOGIN_SUCCESS':
             return {

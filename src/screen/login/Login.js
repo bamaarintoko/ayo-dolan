@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {StyleSheet, View, AsyncStorage, Image, StatusBar} from "react-native";
 import {Button, Input, Item, Text} from "native-base";
 // import { Field, reduxForm } from "redux-form";
-import {actLogin, login, login_} from './action'
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import Modal from 'react-native-modal';
 // import Spinner from 'react-native-spinkit';
@@ -60,11 +59,11 @@ class Login extends Component {
         // this.login = this.login.bind(this)
     }
     componentDidMount() {
-        this.props.dispatch(login_("asu"))
+        // this.props.dispatch(login_("asu"))
     }
     login=()=>{
         FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data)=>{
-        // console.log("aaaaa",this.props.dispatch)
+        console.log("aaaaa",data)
             if (!error) {
 
                 // return dispatch=>{
