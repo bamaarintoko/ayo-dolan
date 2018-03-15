@@ -4,6 +4,25 @@ const initialGetUserId = {
     status_get : false,
     data : ''
 }
+const initialAuthCredential = {
+    status:false,
+    status_login:false,
+    data:[],
+    message:""
+}
+export function redAuthCredential(state = initialAuthCredential, action) {
+    console.log(action.type)
+    switch (action.type){
+        case 'LOGIN_SUCCESS':
+            return {
+                status:true,
+                status_login:action.status_login,
+                data:action.data,
+                message:action.message
+            }
+        default : return state
+    }
+}
 
 export function redGetUserId(state = initialGetUserId, action){
     // console.log(action.type)

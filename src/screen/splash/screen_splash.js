@@ -29,7 +29,7 @@ class screen_splash extends Component {
     }
 
     componentDidMount() {
-        console.log('asu', this.props.redGetUserId)
+        console.log('asu', this.props.redAuthCredential)
         store.get('user_id')
             .then((res) =>{
                 console.log(res)
@@ -81,7 +81,8 @@ const styles = StyleSheet.create({
 });
 function mapStateToProps(state) {
     return {
-        redGetUserId : state.redGetUserId
+        redGetUserId : state.redGetUserId,
+        redAuthCredential : state.redAuthCredential,
     };
 }
 export default connect(mapStateToProps)(screen_splash)

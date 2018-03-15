@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {StyleSheet, View, AsyncStorage, Image, StatusBar} from "react-native";
 import {Button, Input, Item, Text} from "native-base";
 // import { Field, reduxForm } from "redux-form";
-import {actLogin} from './action'
+import {actLogin, login, login_} from './action'
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import Modal from 'react-native-modal';
 // import Spinner from 'react-native-spinkit';
@@ -53,27 +53,35 @@ let styles = {
         fontSize:normalizeFont(4 * .5)
     },
 };
-let _this = this
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {}
-
+        // this.login = this.login.bind(this)
     }
     componentDidMount() {
-
+        this.props.dispatch(login_("asu"))
     }
-    onLoginFound={function(data){
-            console.log("Existing login found.");
-            console.log(data);
-            _this.setState({ user : data.credentials });
-        }}
-    login(){
-        console.log("aaaaa")
-        FBLoginManager.loginWithPermissions(["email","user_friends"], function(error, data){
+    login=()=>{
+        FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data)=>{
+        // console.log("aaaaa",this.props.dispatch)
             if (!error) {
-                console.log("Login data: ", data);
+
+                // return dispatch=>{
+                    this.props.dispatch({
+                        type : 'LOGIN_SUCCESS',
+                        status_login : true,
+                        data:data.profile,
+                        message:"login facebook sukses"
+                    })
+                // }
             } else {
+                // this.props.dispatch({
+                //     type : 'LOGIN_ERROR',
+                //     status_login : true,
+                //     data:data.profile,
+                //     message:"login facebook failed"
+                // })
                 console.log("Error: ", data);
             }
         })
@@ -128,7 +136,7 @@ class Login extends Component {
                         </View>
                         <View style={{flex: 1, flexDirection: 'row'}}>
                             <View style={{flex: 1}}>
-                                <Button onPress={()=>this.login()} style={{marginTop: 2, backgroundColor: '#3b5998'}} small block info>
+                                <Button onPress={this.login} style={{marginTop: 2, backgroundColor: '#3b5998'}} small block info>
                                     <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
                                                 name='facebook'/></Text>
                                 </Button>
@@ -156,4 +164,4 @@ function mapStateToProps(state) {
 // export default reduxForm({
 //     form: 'FormLogin'
 // })(FormLogin);
-export default connect()(Login)
+export default connect(mapStateToProps)(Login)

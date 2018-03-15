@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux'
 import {nav} from './dataReducers'
 
-import {redGetUserId,rehydrated} from './userReducers'
+import {redGetUserId,rehydrated,redAuthCredential} from './userReducers'
 import {redGetDataPeople} from './homeReducers'
 
 const rootReducer = combineReducers({
@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
     redGetUserId:redGetUserId,
     redGetDataPeople:redGetDataPeople,
     rehydrated:rehydrated,
+    redAuthCredential:redAuthCredential,
 })
 
 export default rootReducer
