@@ -63,7 +63,6 @@ class Login extends Component {
     }
     login=()=>{
         FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data)=>{
-        console.log("aaaaa",data)
             if (!error) {
 
                 // return dispatch=>{
@@ -72,6 +71,9 @@ class Login extends Component {
                         status_login : true,
                         data:data.profile,
                         message:"login facebook sukses"
+                    })
+                    this.props.dispatch({
+                        type:'HOME'
                     })
                 // }
             } else {
@@ -104,7 +106,7 @@ class Login extends Component {
                             source={require('../../utils/assetss/header.png')}
                         />
                     </View>
-                    <View style={{flex: 1.5, paddingLeft: 30, paddingRight: 30}}>
+                    <View style={{flex: 2, paddingLeft: 30, paddingRight: 30}}>
                         <Item rounded>
                             <View style={{width: 25}}>
                                 <Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active name='envelope'/>
@@ -138,12 +140,6 @@ class Login extends Component {
                                 <Button onPress={this.login} style={{marginTop: 2, backgroundColor: '#3b5998'}} small block info>
                                     <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
                                                 name='facebook'/></Text>
-                                </Button>
-                            </View>
-                            <View style={{flex: 1}}>
-                                <Button onPress={()=>console.log("gmail login")} style={{marginTop: 2, backgroundColor: '#d34836'}} small block info>
-                                    <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
-                                                name='google'/></Text>
                                 </Button>
                             </View>
                         </View>

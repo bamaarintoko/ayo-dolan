@@ -4,21 +4,22 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     AppRegistry, AsyncStorage,
     StyleSheet,
     Text,
     View, StatusBar
 } from 'react-native';
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import Spinner from 'react-native-spinkit'
 import store from 'react-native-simple-store';
 
-import { actSplashLogin } from '../login/action'
+import {actSplashLogin} from '../login/action'
 import {actGetUserId} from './action'
 
 import Logo from '../../utils/assetss/logo.png'
+
 class screen_splash extends Component {
     constructor(props) {
         super(props);
@@ -29,23 +30,28 @@ class screen_splash extends Component {
     }
 
     componentDidMount() {
-        console.log('asu', JSON.parse(this.props.redAuthCredential.data))
+        console.log('--->', this.props.redAuthCredential)
         store.get('user_id')
-            .then((res) =>{
-                console.log(res)
-                if (res === null){
-                    let generateUserId = Math.floor(Math.random() * 2000)+1000;
-                    store.push('user_id', generateUserId)
-                    this.props.dispatch(actGetUserId(generateUserId))
-                } else {
-                    this.props.dispatch(actGetUserId(res[0]))
-                    console.log("------->",res[0]) // 'Blurry Face'
+            .then((res) => {
+                    console.log(res)
+                    if (res === null) {
+                        let generateUserId = Math.floor(Math.random() * 2000) + 1000;
+                        store.push('user_id', generateUserId)
+                        this.props.dispatch(actGetUserId(generateUserId))
+                    } else {
+                        this.props.dispatch(actGetUserId(res[0]))
+                        console.log("------->", res[0]) // 'Blurry Face'
+                    }
                 }
-            }
             )
-        setTimeout(() => {
-            this.props.navigation.dispatch({ type: 'Login' });
-        }, 3000)
+        if (this.props.redAuthCredential.status_login) {
+            this.props.navigation.dispatch({type: 'HOME'});
+        } else {
+
+            setTimeout(() => {
+                this.props.navigation.dispatch({type: 'Login'});
+            }, 3000)
+        }
     }
 
     render() {
@@ -79,10 +85,12 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
 });
+
 function mapStateToProps(state) {
     return {
-        redGetUserId : state.redGetUserId,
-        redAuthCredential : state.redAuthCredential,
+        redGetUserId: state.redGetUserId,
+        redAuthCredential: state.redAuthCredential,
     };
 }
+
 export default connect(mapStateToProps)(screen_splash)

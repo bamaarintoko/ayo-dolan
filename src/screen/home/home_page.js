@@ -86,7 +86,7 @@ class HomePage extends Component {
             initialRedGetDataPeople:true,
 
         }
-        this.socket = io('http://192.168.242.2:3010', {
+        this.socket = io('http://192.168.43.147:3010', {
             // const socket = io('http://192.168.43.72:3010', {
             transports: ['websocket']
         })
