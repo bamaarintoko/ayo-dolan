@@ -20,6 +20,13 @@ export function redAuthCredential(state = initialAuthCredential, action) {
                 data:action.data,
                 message:action.message
             }
+        case 'LOG_OUT':
+            return {
+                status:false,
+                status_login:false,
+                data:[],
+                message:""
+            }
         default : return state
     }
 }
