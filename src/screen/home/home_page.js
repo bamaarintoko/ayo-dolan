@@ -178,6 +178,7 @@ class HomePage extends Component {
                                         backgroundColor: '#FFFFFF'
                                     }}>
                                         <View style={styles.box_parent}>
+
                                             <View style={styles.box_child_image}>
                                                 <Image
                                                     style={{width: normalize(150 * .6), height: normalize(150 * .6)}}
