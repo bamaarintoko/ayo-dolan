@@ -59,7 +59,7 @@ class ViewProfile extends Component {
                     <Text style={styles.font_middle}>Informasi</Text>
                 </View>
                 <View style={{flex: 3, backgroundColor: '#FFFFFF'}}/>
-                    <TouchableWithoutFeedback onPress={()=>console.log("asu")}>
+                    <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('Setting')}>
                 <View style={{height: 50, padding: 15, alignSelf: 'flex-end', position: 'absolute'}}>
                         <Icon name="ellipsis-v" size={25} color={'#FFFFFF'}/>
                 </View>

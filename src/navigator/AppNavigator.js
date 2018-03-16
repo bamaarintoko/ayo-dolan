@@ -6,6 +6,7 @@ import {
 import screenHome from '../screen/home/screen_home'
 import screenSplash from '../screen/splash/screen_splash'
 import ViewDetailMessage from '../screen/message/screen-detail-message'
+import ViewSetting from '../screen/setting/screen-setting'
 // import screenAdd from '../screen/home/screen_add'
 // import screenDetail from '../screen/detail/screen_detail'
 // import screenAddDet from '../screen/detail/screen_add_det'
@@ -67,6 +68,7 @@ const sideBar = DrawerNavigator({
 export const AppNavigator = StackNavigator({
     Splash: {screen: screenSplash},
     Login: {screen: LoginScreen},
+    Setting: {screen: ViewSetting},
     // // Menu: {screen: AppDrawer},
     Menu: {screen: sideBar},
     // Add: {screen: screenAdd},
