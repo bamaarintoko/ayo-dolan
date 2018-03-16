@@ -8,7 +8,9 @@ class ViewSetting extends Component {
         return (
             <View>
                 <Head
-                    leftPress={() => this.props.navigation.navigate('DrawerOpen')}
+                    body={"Setting"}
+                    leftIcon={'arrow-left'}
+                    leftPress={() => this.props.navigation.goBack()}
                     rightPress={() => this.props.navigation.navigate('DetailMessage')}
                 />
             </View>
