@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {
     AppRegistry,
     StyleSheet,
-    View, Dimensions, Image, Platform, StatusBar, Text, FlatList
+    View, Dimensions, Image, Platform, StatusBar, Text, FlatList, Animated
 } from 'react-native';
 import {
     Body,
@@ -19,46 +19,48 @@ import {normalize, normalizeFont} from "../../utils/func";
 import store from "react-native-simple-store";
 import Collapsible from 'react-native-collapsible-header';
 import {actGetPeople} from "./action";
+import Placeholder from 'rn-placeholder';
+import HomeLoading from "../../Components/HomeLoading";
 
 const {width, height} = require('Dimensions').get('window');
 
 function mapStateToProps(state) {
     return {
         redGetUserId: state.redGetUserId,
-        redGetDataPeople:state.redGetDataPeople
+        redGetDataPeople: state.redGetDataPeople
     };
 }
 
 const home = [
     {
-        user_id:'1383',
+        user_id: '1383',
         people_name: 'Jennifer J. Brown',
         people_photo: 'https://randomuser.me/api/portraits/women/80.jpg'
     },
     {
-        user_id:'1903',
+        user_id: '1903',
         people_name: 'Isabelle Chadwick',
         people_photo: 'https://randomuser.me/api/portraits/women/17.jpg'
     },
     {
-        user_id:'1482',
+        user_id: '1482',
         people_name: 'Elline Chadwick',
         people_photo: 'https://randomuser.me/api/portraits/women/16.jpg'
     },
     {
-        user_id:'1582',
+        user_id: '1582',
         key: '2',
         people_name: 'Abigail Booth',
         people_photo: 'https://randomuser.me/api/portraits/women/26.jpg'
     },
     {
-        user_id:'1682',
+        user_id: '1682',
         key: '3',
         people_name: 'Harvey Reynolds',
         people_photo: 'https://randomuser.me/api/portraits/men/66.jpg'
     },
     {
-        user_id:'1782',
+        user_id: '1782',
         key: '4',
         people_name: 'Alice Whittaker',
         people_photo: 'https://randomuser.me/api/portraits/women/79.jpg'
@@ -83,7 +85,7 @@ class HomePage extends Component {
             data: [],
             page: 2,
             isRefresh: false,
-            initialRedGetDataPeople:true,
+            initialRedGetDataPeople: true,
 
         }
         this.socket = io('http://192.168.43.147:3010', {
@@ -91,7 +93,7 @@ class HomePage extends Component {
             transports: ['websocket']
         })
         this.socket.on('online_user', (data) => {
-            console.log("online user",data)
+            console.log("online user", data)
         });
         this.onLoad = this.onLoad.bind(this)
     }
@@ -99,12 +101,12 @@ class HomePage extends Component {
 
     componentDidUpdate(prevProps, prevState) {
         // console.log(this.props.redGetDataPeople)
-        if (this.props.redGetDataPeople.status === prevState.initialRedGetDataPeople){
+        if (this.props.redGetDataPeople.status === prevState.initialRedGetDataPeople) {
             this.setState({
-                data:this.props.redGetDataPeople.data
+                data: this.props.redGetDataPeople.data
             })
             this.props.dispatch({
-                type:'GET_DATA_PEOPLE_REFRESH'
+                type: 'GET_DATA_PEOPLE_REFRESH'
             })
         }
     }
@@ -112,9 +114,9 @@ class HomePage extends Component {
 
     componentDidMount() {
         this.socket.on('connect', () => {
-            this.socket.emit('online', {myId:this.props.redGetUserId.data,friendId:['1903','1383','1482']})
+            this.socket.emit('online', {myId: this.props.redGetUserId.data, friendId: ['1903', '1383', '1482']})
         })
-        this.socket.emit('online_user', {myId:this.props.redGetUserId.data,friendId:['1903','1383','1482']})
+        this.socket.emit('online_user', {myId: this.props.redGetUserId.data, friendId: ['1903', '1383', '1482']})
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)
         })
@@ -161,8 +163,13 @@ class HomePage extends Component {
                     leftPress={() => this.props.navigation.navigate('DrawerOpen')}
                     rightPress={() => this.props.navigation.navigate('DetailMessage')}
                 />
+                {
+                    this.state.data.length < 1
+                        ?
+                        <HomeLoading/>
+                        :
                         <FlatList
-                            style={{backgroundColor: '#E0E0E0', marginTop:2}}
+                            style={{backgroundColor: '#E0E0E0', marginTop: 2}}
                             data={this.state.data}
                             refreshing={this.state.isRefresh}
                             onRefresh={() => {
@@ -229,6 +236,7 @@ class HomePage extends Component {
                             onEndReached={this.onLoad}
                             onEndReachedThreshold={1}
                         />
+                }
 
 
             </Container>
