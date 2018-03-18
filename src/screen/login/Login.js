@@ -61,7 +61,8 @@ class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            flexLogo:1
+            flexLogo:1,
+            hideButtonFb:false
         }
         // this.login = this.login.bind(this)
     }
@@ -76,14 +77,16 @@ class Login extends Component {
     }
     _keyboardDidShow= ()=> {
         this.setState({
-            flexLogo:0
+            flexLogo:0,
+            hideButtonFb:true
         })
         // alert('Keyboard Shown');
     }
 
     _keyboardDidHide= ()=> {
         this.setState({
-            flexLogo:1
+            flexLogo:1,
+            hideButtonFb:false
         })
         // alert('Keyboard Hidden');
     }
@@ -174,21 +177,28 @@ class Login extends Component {
                             <Button onPress={this.onLogin} small block info>
                                 <Text>Login</Text>
                             </Button>
-                            <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
-                                <View style={styles.separatorLine}/>
-                                <Text style={styles.separatorOr}>Or Login With</Text>
-                                <View style={styles.separatorLine}/>
-                            </View>
-                            <View style={{flex: 1, flexDirection: 'row'}}>
-                                <View style={{flex: 1}}>
-                                    <Button onPress={this.login} style={{marginTop: 2, backgroundColor: '#3b5998'}}
-                                            small
-                                            block info>
-                                        <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
-                                                    name='facebook'/></Text>
-                                    </Button>
-                                </View>
-                            </View>
+                            {
+                                !this.state.hideButtonFb
+                                &&
+                                    <View>
+                                        <View style={styles.separatorContainer}>
+                                            <View style={styles.separatorLine}/>
+                                            <Text style={styles.separatorOr}>Or Login With</Text>
+                                            <View style={styles.separatorLine}/>
+                                        </View>
+                                        <View style={{flex: 1, flexDirection: 'row'}}>
+                                            <View style={{flex: 1}}>
+                                                <Button onPress={this.login} style={{marginTop: 2, backgroundColor: '#3b5998'}}
+                                                        small
+                                                        block info>
+                                                    <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
+                                                                name='facebook'/></Text>
+                                                </Button>
+                                            </View>
+                                        </View>
+                                    </View>
+                            }
+
                         </View>
                 </View>
             </Swiper>
