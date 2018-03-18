@@ -11,6 +11,7 @@ import Swiper from 'react-native-swiper'
 import {FBLogin, FBLoginManager} from 'react-native-facebook-login';
 import {normalize, normalizeFont} from "../../utils/func";
 import {Alert} from "react-native";
+import {actLogin} from "./action";
 
 let styles = {
     wrapper: {},
@@ -73,7 +74,7 @@ class Login extends Component {
             let state = {};
             state[key] = e
             this.setState(state);
-            console.log(e)
+            // console.log(e)
         }
     }
     onLogin = () => {
@@ -81,7 +82,8 @@ class Login extends Component {
             username : this.state.username,
             password : this.state.password
         }
-        console.log(params)
+        this.props.dispatch(actLogin(params))
+        // console.log(params)
     }
     login = () => {
         FBLoginManager.loginWithPermissions(["email", "user_friends"], (error, data) => {
