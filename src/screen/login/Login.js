@@ -11,6 +11,7 @@ import Swiper from 'react-native-swiper'
 import {FBLogin, FBLoginManager} from 'react-native-facebook-login';
 import {normalize, normalizeFont} from "../../utils/func";
 import {Alert} from "react-native";
+
 let styles = {
     wrapper: {},
     slide1: {
@@ -49,47 +50,61 @@ let styles = {
     separatorOr: {
         color: '#9B9FA4',
         marginHorizontal: 8,
-        fontSize:normalizeFont(4 * .5)
+        fontSize: normalizeFont(4 * .5)
     },
 };
+
 class Login extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            username: '',
+            password: ''
+        }
         // this.login = this.login.bind(this)
     }
+
     componentDidMount() {
         // this.props.dispatch(login_("asu"))
     }
-    login=()=>{
-        FBLoginManager.loginWithPermissions(["email","user_friends"], (error, data)=>{
+
+    onChange = (key) => {
+        return (e) => {
+            let state = {};
+            state[key] = e
+            this.setState(state);
+            console.log(e)
+        }
+    }
+    onLogin = () => {
+        let params = {
+            username : this.state.username,
+            password : this.state.password
+        }
+        console.log(params)
+    }
+    login = () => {
+        FBLoginManager.loginWithPermissions(["email", "user_friends"], (error, data) => {
             if (!error) {
 
                 // return dispatch=>{
-                    this.props.dispatch({
-                        type : 'LOGIN_SUCCESS',
-                        status_login : true,
-                        data:data.profile,
-                        message:"login facebook sukses"
-                    })
-                    this.props.dispatch({
-                        type:'HOME'
-                    })
+                this.props.dispatch({
+                    type: 'LOGIN_SUCCESS',
+                    status_login: true,
+                    data: data.profile,
+                    message: "login facebook sukses"
+                })
+                this.props.dispatch({
+                    type: 'HOME'
+                })
                 // }
             } else {
-                // this.props.dispatch({
-                //     type : 'LOGIN_ERROR',
-                //     status_login : true,
-                //     data:data.profile,
-                //     message:"login facebook failed"
-                // })
                 console.log("Error: ", data);
             }
         })
     }
+
     render() {
-        var _this = this;
-        // console.log("RNRestart.Restart();", isLoading)
         return (
             <Swiper style={styles.wrapper} loop={false}>
                 <View style={styles.slide1}>
@@ -111,23 +126,24 @@ class Login extends Component {
                             <View style={{width: 25}}>
                                 <Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active name='envelope'/>
                             </View>
-                            <Input style={{height: 40, fontSize: normalizeFont(4 * .5)}} placeholder='Email'/>
+                            <Input onChangeText={this.onChange('username')}
+                                   style={{height: 40, fontSize: normalizeFont(4 * .5)}} placeholder='Email'/>
                         </Item>
                         <Item style={{marginTop: 10}} rounded>
                             <View style={{width: 25, alignItems: 'center'}}>
                                 <Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active name='lock'/>
                             </View>
-                            <Input style={{height: 40, fontSize: normalizeFont(4 * .5)}} placeholder='Password'/>
+                            <Input onChangeText={this.onChange('password')} style={{height: 40, fontSize: normalizeFont(4 * .5)}} placeholder='Password'/>
                         </Item>
                         <View style={{flex: 0.7, flexDirection: 'row', alignItems: 'center'}}>
                             <View style={{flex: 1}}>
                                 <Text style={{fontSize: normalizeFont(4 * .5)}}>Create Account</Text>
                             </View>
-                            <View style={{flex: 1, alignItems:'flex-end'}}>
+                            <View style={{flex: 1, alignItems: 'flex-end'}}>
                                 <Text style={{fontSize: normalizeFont(4 * .5)}}>Forgot Password?</Text>
                             </View>
                         </View>
-                        <Button onPress={()=>this.login()} small block info>
+                        <Button onPress={this.onLogin} small block info>
                             <Text>Login</Text>
                         </Button>
                         <View style={styles.separatorContainer} animation={'zoomIn'} delay={700} duration={400}>
@@ -137,7 +153,8 @@ class Login extends Component {
                         </View>
                         <View style={{flex: 1, flexDirection: 'row'}}>
                             <View style={{flex: 1}}>
-                                <Button onPress={this.login} style={{marginTop: 2, backgroundColor: '#3b5998'}} small block info>
+                                <Button onPress={this.login} style={{marginTop: 2, backgroundColor: '#3b5998'}} small
+                                        block info>
                                     <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
                                                 name='facebook'/></Text>
                                 </Button>
