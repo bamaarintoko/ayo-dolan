@@ -14,6 +14,7 @@ import Head from '../../Components/Head'
 import axios from 'axios'
 import io from 'socket.io-client'
 import Api from '../../utils/Api'
+// import {url_} from '../../utils/Api'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {normalize, normalizeFont} from "../../utils/func";
 import store from "react-native-simple-store";
@@ -21,7 +22,7 @@ import Collapsible from 'react-native-collapsible-header';
 import {actGetPeople} from "./action";
 import Placeholder from 'rn-placeholder';
 import HomeLoading from "../../Components/HomeLoading";
-
+let url = '192.168.100.38:3010';
 const {width, height} = require('Dimensions').get('window');
 
 function mapStateToProps(state) {
@@ -88,7 +89,7 @@ class HomePage extends Component {
             initialRedGetDataPeople: true,
 
         }
-        this.socket = io('http://192.168.43.147:3010', {
+        this.socket = io(url, {
             // const socket = io('http://192.168.43.72:3010', {
             transports: ['websocket']
         })

@@ -10,9 +10,8 @@ import md5 from 'crypto-js/md5';
 import Swiper from 'react-native-swiper'
 import {FBLogin, FBLoginManager} from 'react-native-facebook-login';
 import {normalize, normalizeFont} from "../../utils/func";
-import {Alert, Keyboard, TouchableHighlight} from "react-native";
+import {Keyboard} from "react-native";
 import {actLogin} from "./action";
-import * as Animatable from 'react-native-animatable';
 
 let styles = {
     wrapper: {},
@@ -107,7 +106,7 @@ class Login extends Component {
     onLogin = () => {
         let params = {
             username: this.state.username,
-            password: this.state.password
+            password: md5(md5(this.state.password).toString()).toString()
         }
         this.props.dispatch(actLogin(params))
         // console.log(params)

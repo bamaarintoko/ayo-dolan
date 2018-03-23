@@ -4,12 +4,12 @@ import qs from 'qs'
 // const host      = "http://192.168.100.4/erp/public/api/";
 // const host      = "http://erp.mlskoding.com/api/";
 const host      = "https://randomuser.me/api/";
-
+export const url_ = 'http://192.168.100.38:3010/';
 
 export default class Api {
     static POST(end_point,params){
 
-        const url = `${host}${end_point}`;
+        const url = `${url_}${end_point}`;
         const config = {
             headers: {'Authorization': 'Bearer birds flyy south'}
         };
@@ -23,7 +23,7 @@ export default class Api {
         // }
         //console.log(a);
         // return axios.post(url,qs.stringify(params))
-        return axios.post(url,qs.stringify(params),config)
+        return axios.post(url,qs.stringify(params))
     }
 
     static GET(end_point){
