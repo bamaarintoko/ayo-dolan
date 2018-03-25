@@ -119,9 +119,9 @@ class HomePage extends Component {
         console.log(this.props.redAuthCredential.data.user_id)
         this.socket.on('connect', () => {
             console.log("is connect")
-            this.socket.emit('online', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1903', '1383', '1482']})
+            this.socket.emit('online', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1', '2']})
         })
-        this.socket.emit('online_user', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1903', '1383', '1482']})
+        this.socket.emit('online_user', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1', '2']})
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)
         })
