@@ -7,6 +7,8 @@ import screenHome from '../screen/home/screen_home'
 import screenSplash from '../screen/splash/screen_splash'
 import ViewDetailMessage from '../screen/message/screen-detail-message'
 import ViewSetting from '../screen/setting/screen-setting'
+import ViewEditPassword from '../screen/setting/edit_password/screen-edit-password'
+import ViewEditProfile from '../screen/setting/edit_profil/screen-edit-profil'
 // import screenAdd from '../screen/home/screen_add'
 // import screenDetail from '../screen/detail/screen_detail'
 // import screenAddDet from '../screen/detail/screen_add_det'
@@ -73,6 +75,8 @@ export const AppNavigator = StackNavigator({
     Menu: {screen: sideBar},
     // Add: {screen: screenAdd},
     DetailMessage: {screen: ViewDetailMessage},
+    ViewEditPassword: {screen: ViewEditPassword},
+    ViewEditProfile: {screen: ViewEditProfile},
     // AddDet: {screen: screenAddDet},
     // InComingItems: {screen: InComingItems},
     // OutGoingItems: {screen: OutGoingItems},

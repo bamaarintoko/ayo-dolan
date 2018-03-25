@@ -12,8 +12,8 @@ class ViewSetting extends Component {
 
     }
 
-    onLogOut=()=>{
-        this.props.dispatch({type:'LOG_OUT'})
+    onLogOut = () => {
+        this.props.dispatch({type: 'LOG_OUT'})
         this.props.navigation.navigate('Splash')
     }
 
@@ -30,14 +30,18 @@ class ViewSetting extends Component {
                     <View style={{height: 40, padding: 10, justifyContent: 'center'}}>
                         <Text style={{fontWeight: 'bold'}}>Account</Text>
                     </View>
+                    <TouchableHighlight onPress={()=>this.props.navigation.navigate('ViewEditProfile')}>
                     <View style={styles.icon_list}>
                         <View style={{width: 30}}><Icon name="user" size={20} color={'#757575'}/></View>
                         <Text>Edit Profil</Text>
                     </View>
-                    <View style={styles.icon_list}>
-                        <View style={{width: 30}}><Icon name="lock" size={20} color={'#757575'}/></View><Text>Edit
-                        Password</Text>
-                    </View>
+                    </TouchableHighlight>
+                    <TouchableHighlight onPress={()=>this.props.navigation.navigate('ViewEditPassword')}>
+                        <View style={styles.icon_list}>
+                            <View style={{width: 30}}><Icon name="lock" size={20} color={'#757575'}/></View><Text>Edit
+                            Password</Text>
+                        </View>
+                    </TouchableHighlight>
                     <View style={styles.separatorContainer}>
                         <View style={styles.separatorLine}/>
                     </View>
