@@ -28,17 +28,19 @@ class ViewSetting extends Component {
                 />
                 <Content>
                     <View style={{height: 40, padding: 10, justifyContent: 'center'}}>
-                        <Text style={{fontWeight: 'bold'}}>Account</Text>
+                        <Text style={{fontWeight: 'bold', fontSize:normalizeFont(3 * .7)}}>Account</Text>
                     </View>
                     <TouchableHighlight onPress={()=>this.props.navigation.navigate('ViewEditProfile')}>
                     <View style={styles.icon_list}>
-                        <View style={{width: 30}}><Icon name="user" size={20} color={'#757575'}/></View>
-                        <Text>Edit Profil</Text>
+                        <View style={{width: 30}}><Icon name="user" size={normalizeFont(3 * .9)} color={'#757575'}/></View>
+                        <Text style={{fontSize:normalizeFont(3 * .8)}}>Edit Profil</Text>
                     </View>
                     </TouchableHighlight>
                     <TouchableHighlight onPress={()=>this.props.navigation.navigate('ViewEditPassword')}>
                         <View style={styles.icon_list}>
-                            <View style={{width: 30}}><Icon name="lock" size={20} color={'#757575'}/></View><Text>Edit
+                            <View style={{width: 30}}>
+                                <Icon name="lock" size={normalizeFont(3 * .9)} color={'#757575'}/></View>
+                            <Text style={{fontSize:normalizeFont(3 * .8)}}>Edit
                             Password</Text>
                         </View>
                     </TouchableHighlight>
@@ -47,7 +49,10 @@ class ViewSetting extends Component {
                     </View>
                     <TouchableHighlight onPress={this.onLogOut} underlayColor={'#EEEEEE'}>
                         <View style={styles.icon_list}>
-                            <View style={{width: 30}}><Icon name="sign-out" size={20} color={'#757575'}/></View><Text>Log
+                            <View style={{width: 30}}>
+                                <Icon name="sign-out" size={normalizeFont(3 * .9)} color={'#757575'}/>
+                            </View>
+                            <Text style={{fontSize:normalizeFont(3 * .8)}}>Log
                             Out</Text>
                         </View>
                     </TouchableHighlight>
