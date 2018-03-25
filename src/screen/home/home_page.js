@@ -23,13 +23,14 @@ import {actGetPeople} from "./action";
 import Placeholder from 'rn-placeholder';
 import HomeLoading from "../../Components/HomeLoading";
 // let url = '192.168.100.38:3010';
-let url = '192.168.43.147:3010';
+let url = 'http://192.168.43.147:3010';
 const {width, height} = require('Dimensions').get('window');
 
 function mapStateToProps(state) {
     return {
         redGetUserId: state.redGetUserId,
-        redGetDataPeople: state.redGetDataPeople
+        redGetDataPeople: state.redGetDataPeople,
+        redAuthCredential: state.redAuthCredential
     };
 }
 
@@ -115,10 +116,12 @@ class HomePage extends Component {
 
 
     componentDidMount() {
+        console.log(this.props.redAuthCredential.data.user_id)
         this.socket.on('connect', () => {
-            this.socket.emit('online', {myId: this.props.redGetUserId.data, friendId: ['1903', '1383', '1482']})
+            console.log("is connect")
+            this.socket.emit('online', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1903', '1383', '1482']})
         })
-        this.socket.emit('online_user', {myId: this.props.redGetUserId.data, friendId: ['1903', '1383', '1482']})
+        this.socket.emit('online_user', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1903', '1383', '1482']})
         this.socket.on('connect_error', (err) => {
             console.log("--->", err)
         })
