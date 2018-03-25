@@ -10,7 +10,9 @@ import {StyleSheet, View, TouchableWithoutFeedback} from "react-native";
 import {normalize, normalizeFont} from "../../utils/func";
 
 function mapStateToProps(state) {
-    return {};
+    return {
+        redAuthCredential: state.redAuthCredential
+    };
 }
 
 class ViewProfile extends Component {
@@ -25,6 +27,10 @@ class ViewProfile extends Component {
         }
     }
 
+    componentDidMount() {
+        console.log(this.props.redAuthCredential)
+    }
+
     render() {
         return (
             <View style={{
@@ -35,6 +41,7 @@ class ViewProfile extends Component {
                 <View style={{flex: 2, backgroundColor: '#03A9F4', alignItems: 'center', justifyContent: 'center'}}>
                     <Thumbnail large
                                source={{uri: 'https://scontent.fsub5-1.fna.fbcdn.net/v/t1.0-9/17953001_1185980358197953_2390820174044708724_n.jpg?oh=63a0761867d5c4e05044cadb3dce089b&oe=5B137EB4'}}/>
+                    <Text style={styles.font_middle}>{this.props.redAuthCredential.data.user_name}</Text>
                 </View>
                 <View style={{height: 60, backgroundColor: '#FFFFFF'}}>
                     <View style={{flex: 1, flexDirection: 'row', padding: 10}}>

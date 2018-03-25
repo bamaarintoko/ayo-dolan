@@ -4,7 +4,8 @@ import qs from 'qs'
 // const host      = "http://192.168.100.4/erp/public/api/";
 // const host      = "http://erp.mlskoding.com/api/";
 const host      = "https://randomuser.me/api/";
-export const url_ = 'http://192.168.100.38:3010/';
+// export const url_ = 'http://192.168.100.38:3010/';
+export const url_ = 'http://192.168.43.147:3010/';
 
 export default class Api {
     static POST(end_point,params){

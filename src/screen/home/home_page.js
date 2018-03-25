@@ -22,7 +22,8 @@ import Collapsible from 'react-native-collapsible-header';
 import {actGetPeople} from "./action";
 import Placeholder from 'rn-placeholder';
 import HomeLoading from "../../Components/HomeLoading";
-let url = '192.168.100.38:3010';
+// let url = '192.168.100.38:3010';
+let url = '192.168.43.147:3010';
 const {width, height} = require('Dimensions').get('window');
 
 function mapStateToProps(state) {
