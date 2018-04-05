@@ -5,7 +5,8 @@ import qs from 'qs'
 // const host      = "http://erp.mlskoding.com/api/";
 const host      = "https://randomuser.me/api/";
 // export const url_ = 'http://192.168.100.38:3010/';
-export const url_ = 'http://192.168.43.147:3010/';
+// export const url_ = 'http://192.168.43.147:3010/';
+export const url_ = 'http://api.malaskoding.com/';
 
 export default class Api {
     static POST(end_point,params){

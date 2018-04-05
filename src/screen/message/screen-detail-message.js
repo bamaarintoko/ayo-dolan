@@ -7,8 +7,8 @@ import io from 'socket.io-client'
 import {Bubble, GiftedChat} from 'react-native-gifted-chat'
 import store from "react-native-simple-store";
 // import {url_} from "../../utils/Api";
-let url = 'http://192.168.43.147:3010';
-
+// let url = 'http://192.168.43.147:3010';
+let url = 'http://api.malaskoding.com:3010';
 // let room = "1903";
 
 class ViewDetailMessage extends Component {
@@ -24,7 +24,7 @@ class ViewDetailMessage extends Component {
 
         this.socket.on('message', (message) => {
             // console.log(this.props.navigation.state.params.id)
-            // console.log(message.senderId)
+            console.log(message.senderId)
             if (this.props.navigation.state.params.id === message.senderId){
                 // console.log("con", message)
                 this.onSetMessage(message)
