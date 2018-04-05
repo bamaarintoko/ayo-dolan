@@ -116,7 +116,7 @@ class HomePage extends Component {
 
 
     componentDidMount() {
-        console.log(this.props.redAuthCredential.data.user_id)
+        // console.log(this.props.redAuthCredential.data.user_id)
         this.socket.on('connect', () => {
             console.log("is connect")
             this.socket.emit('online', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1', '2']})

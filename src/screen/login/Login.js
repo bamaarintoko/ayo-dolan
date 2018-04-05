@@ -189,7 +189,7 @@ class Login extends Component {
                                               name='lock'/>
                                     </View>
                                     <Input onChangeText={this.onChange('password')}
-                                           style={{height: 40, fontSize: normalizeFont(4 * .5)}}
+                                           style={{height: 50, fontSize: normalizeFont(4 * .5)}}
                                            placeholder='Password'/>
                                 </Item>
                                 <View style={{flexDirection: 'row', alignItems: 'center', height: 40}}>

@@ -6,6 +6,8 @@ import Head from "../../Components/Head";
 import io from 'socket.io-client'
 import {Bubble, GiftedChat} from 'react-native-gifted-chat'
 import store from "react-native-simple-store";
+// import {url_} from "../../utils/Api";
+let url = 'http://192.168.43.147:3010';
 
 // let room = "1903";
 
@@ -16,15 +18,15 @@ class ViewDetailMessage extends Component {
             message: [],
             userId: null
         }
-        this.socket = io('http://192.168.242.2:3010', {
+        this.socket = io(url, {
             transports: ['websocket']
         })
 
         this.socket.on('message', (message) => {
-
-            if (this.props.navigation.state.params.id === message.senderId.toString()){
-                //console.log("con", message.senderId)
-                //console.log("con",this.props.navigation.state.params.id)
+            // console.log(this.props.navigation.state.params.id)
+            // console.log(message.senderId)
+            if (this.props.navigation.state.params.id === message.senderId){
+                // console.log("con", message)
                 this.onSetMessage(message)
 
             }
@@ -32,7 +34,7 @@ class ViewDetailMessage extends Component {
         this.renderBubble = this.renderBubble.bind(this)
         this.onSetMessage = this.onSetMessage.bind(this)
         this._storeMessages = this._storeMessages.bind(this)
-        this.socket.on('message_',this.onSetMessage)
+        // this.socket.on('message_',this.onSetMessage)
     }
 
     onSetMessage(data){
@@ -48,11 +50,16 @@ class ViewDetailMessage extends Component {
     }
 
     componentDidMount() {
-        this.socket.emit('init', {
-            senderId: this.props.redGetUserId.data,
-            receiverId: this.props.navigation.state.params.id,
-        });
-        this.socket.emit('room', this.props.navigation.state.params.id);
+        this.socket.on('connect', () => {
+            console.log("is connect")
+            this.socket.emit('init', {
+                senderId: this.props.redAuthCredential.data.user_id,
+                receiverId: this.props.navigation.state.params.id,
+            });
+            // this.socket.emit('online')
+        })
+
+        // this.socket.emit('room', this.props.navigation.state.params.id);
     }
 
     renderBubble(props) {
@@ -75,7 +82,7 @@ class ViewDetailMessage extends Component {
 
         this.socket.emit('message', {
             text: messages,
-            senderId: this.props.redGetUserId.data,
+            senderId: this.props.redAuthCredential.data.user_id,
             receiverId: this.props.navigation.state.params.id,
         });
     }
@@ -96,7 +103,7 @@ class ViewDetailMessage extends Component {
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
                     user={{
-                        _id : this.props.redGetUserId.data
+                        _id : this.props.redAuthCredential.data.user_id
                     }}
                 />
             </Container>
@@ -105,7 +112,10 @@ class ViewDetailMessage extends Component {
 }
 
 function mapStateToProps(state) {
-    return {redGetUserId: state.redGetUserId};
+    return {
+        redGetUserId: state.redGetUserId,
+        redAuthCredential: state.redAuthCredential,
+    };
 }
 
 export default connect(
