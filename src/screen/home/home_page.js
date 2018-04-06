@@ -22,6 +22,8 @@ import Collapsible from 'react-native-collapsible-header';
 import {actGetPeople} from "./action";
 import Placeholder from 'rn-placeholder';
 import HomeLoading from "../../Components/HomeLoading";
+import {LeftImage, RightImage} from "../../Components/List";
+
 // let url = '192.168.100.38:3010';
 // let url = 'http://192.168.43.147:3010';
 let url = 'http://api.malaskoding.com:3010';
@@ -169,70 +171,28 @@ class HomePage extends Component {
                     leftPress={() => this.props.navigation.navigate('DrawerOpen')}
                     rightPress={() => this.props.navigation.navigate('DetailMessage')}
                 />
-                <View style={{height:115, marginLeft:10, marginRight:10}}>
-                    <View style={{flex:1,marginLeft:40,borderRadius:5,marginTop:5,marginBottom:5, backgroundColor:'#FFFFFF'}}>
 
-                    </View>
-                    <View style={{height:85,overflow: 'hidden', borderRadius:5, marginTop:15, width:85, position:'absolute', backgroundColor:'red'}}>
-                        <Image
-                            style={{width: normalize(150 * .5), height: normalize(150 * .5)}}
-                            source={{uri: 'http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png'}}
-                        />
-                    </View>
-
-
-                </View>
-                <View style={{height:115, marginLeft:10, marginRight:10}}>
-
-                    <View style={{flex:1,left:0,marginRight:40,borderRadius:5,marginTop:5,marginBottom:5, backgroundColor:'#FFFFFF'}}>
-
-                    </View>
-                    <View style={{height:85,overflow: 'hidden', right:0, borderRadius:5, marginTop:15, width:85, position:'absolute', backgroundColor:'red'}}>
-                        <Image
-                            style={{width: normalize(150 * .5), height: normalize(150 * .5)}}
-                            source={{uri: 'http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png'}}
-                        />
-                    </View>
-
-
-                </View>
                 {
                     this.state.data.length < 1
                         ?
                         <HomeLoading/>
                         :
                         <FlatList
-                            style={{backgroundColor: '#E0E0E0', marginTop: 2}}
+                            style={{marginTop: 2}}
                             data={this.state.data}
                             refreshing={this.state.isRefresh}
                             onRefresh={() => {
                                 this.onRefresh()
                             }}
-                            renderItem={({item,index}) => (
+                            renderItem={({item, index}) => (
                                 <View>
-                                    <View style={{
-                                        flex: 1,
-                                        flexDirection: 'column',
-                                        padding: 10,
-                                        marginBottom: 2,
-                                        backgroundColor: '#FFFFFF'
-                                    }}>
-                                        <View style={styles.box_parent}>
-                                            {console.log(index%2)}
-                                            <View style={styles.box_child_image}>
-                                                <Image
-                                                    style={{width: normalize(150 * .6), height: normalize(150 * .6)}}
-                                                    source={{uri: item.picture.large}}
-                                                />
-                                            </View>
-                                            <View style={styles.box_child_info}>
-                                                <View style={{height: normalize(125 * .6)}}>
-                                                    <Text style={{
-                                                        fontSize: normalizeFont(3 * .7),
-                                                        fontWeight: 'bold',
-                                                        color: '#000000'
-                                                    }}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>
-
+                                    {
+                                        index % 2 === 0
+                                            ?
+                                            <LeftImage img={item.picture.large}>
+                                                <Text
+                                                    style={{fontSize: normalizeFont(3 * .7)}}>{capitalizeFirstLetter(item.name.first)}</Text>
+                                                <View>
                                                     <Text style={{
                                                         fontSize: normalizeFont(2 * .7),
                                                         color: '#000000',
@@ -245,8 +205,9 @@ class HomePage extends Component {
                                                         marginTop: 5
                                                     }}>Kumpul di
                                                         ...</Text>
+
                                                 </View>
-                                                <View style={{flex: 1, flexDirection: 'row'}}>
+                                                <View style={{flexDirection:'row',position: 'absolute', bottom: 0, marginBottom: 10}}>
                                                     <View style={{flex: 1}}>
                                                         <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
                                                                     name="calendar-o"/></Text>
@@ -260,9 +221,83 @@ class HomePage extends Component {
                                                                     name="user"/></Text>
                                                     </View>
                                                 </View>
-                                            </View>
-                                        </View>
-                                    </View>
+
+                                            </LeftImage>
+                                            :
+                                            <RightImage img={item.picture.large}>
+                                                <View style={{height: normalize(125 * .6), marginLeft: 7}}>
+                                                    <Text style={{
+                                                        fontSize: normalizeFont(3 * .7)
+                                                    }}>{capitalizeFirstLetter(item.name.first)}</Text>
+                                                    <Text style={{
+                                                        fontSize: normalizeFont(2 * .7),
+                                                        color: '#000000',
+                                                        marginTop: 5
+                                                    }}>Siapa mau main
+                                                        ke ...</Text>
+                                                    <Text style={{
+                                                        fontSize: normalizeFont(2 * .7),
+                                                        color: '#000000',
+                                                        marginTop: 5
+                                                    }}>Kumpul di
+                                                        ...</Text>
+                                                </View>
+                                            </RightImage>
+                                    }
+
+                                    {/*<View style={{*/}
+                                    {/*flex: 1,*/}
+                                    {/*flexDirection: 'column',*/}
+                                    {/*padding: 10,*/}
+                                    {/*marginBottom: 2,*/}
+                                    {/*backgroundColor: '#FFFFFF'*/}
+                                    {/*}}>*/}
+                                    {/*<View style={styles.box_parent}>*/}
+                                    {/*{console.log(index%2)}*/}
+                                    {/*<View style={styles.box_child_image}>*/}
+                                    {/*<Image*/}
+                                    {/*style={{width: normalize(150 * .6), height: normalize(150 * .6)}}*/}
+                                    {/*source={{uri: item.picture.large}}*/}
+                                    {/*/>*/}
+                                    {/*</View>*/}
+                                    {/*<View style={styles.box_child_info}>*/}
+                                    {/*<View style={{height: normalize(125 * .6)}}>*/}
+                                    {/*<Text style={{*/}
+                                    {/*fontSize: normalizeFont(3 * .7),*/}
+                                    {/*fontWeight: 'bold',*/}
+                                    {/*color: '#000000'*/}
+                                    {/*}}>{capitalizeFirstLetter(item.name.first) + " " + capitalizeFirstLetter(item.name.last)}</Text>*/}
+
+                                    {/*<Text style={{*/}
+                                    {/*fontSize: normalizeFont(2 * .7),*/}
+                                    {/*color: '#000000',*/}
+                                    {/*marginTop: 5*/}
+                                    {/*}}>Siapa mau main*/}
+                                    {/*ke ...</Text>*/}
+                                    {/*<Text style={{*/}
+                                    {/*fontSize: normalizeFont(2 * .7),*/}
+                                    {/*color: '#000000',*/}
+                                    {/*marginTop: 5*/}
+                                    {/*}}>Kumpul di*/}
+                                    {/*...</Text>*/}
+                                    {/*</View>*/}
+                                    {/*<View style={{flex: 1, flexDirection: 'row'}}>*/}
+                                    {/*<View style={{flex: 1}}>*/}
+                                    {/*<Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}*/}
+                                    {/*name="calendar-o"/></Text>*/}
+                                    {/*</View>*/}
+                                    {/*<View style={{flex: 1}}>*/}
+                                    {/*<Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}*/}
+                                    {/*name="clock-o"/></Text>*/}
+                                    {/*</View>*/}
+                                    {/*<View style={{flex: 1}}>*/}
+                                    {/*<Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}*/}
+                                    {/*name="user"/></Text>*/}
+                                    {/*</View>*/}
+                                    {/*</View>*/}
+                                    {/*</View>*/}
+                                    {/*</View>*/}
+                                    {/*</View>*/}
                                 </View>
                             )}
                             keyExtractor={(item, index) => '' + index}
