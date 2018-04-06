@@ -169,6 +169,33 @@ class HomePage extends Component {
                     leftPress={() => this.props.navigation.navigate('DrawerOpen')}
                     rightPress={() => this.props.navigation.navigate('DetailMessage')}
                 />
+                <View style={{height:115, marginLeft:10, marginRight:10}}>
+                    <View style={{flex:1,marginLeft:40,borderRadius:5,marginTop:5,marginBottom:5, backgroundColor:'#FFFFFF'}}>
+
+                    </View>
+                    <View style={{height:85,overflow: 'hidden', borderRadius:5, marginTop:15, width:85, position:'absolute', backgroundColor:'red'}}>
+                        <Image
+                            style={{width: normalize(150 * .5), height: normalize(150 * .5)}}
+                            source={{uri: 'http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png'}}
+                        />
+                    </View>
+
+
+                </View>
+                <View style={{height:115, marginLeft:10, marginRight:10}}>
+
+                    <View style={{flex:1,left:0,marginRight:40,borderRadius:5,marginTop:5,marginBottom:5, backgroundColor:'#FFFFFF'}}>
+
+                    </View>
+                    <View style={{height:85,overflow: 'hidden', right:0, borderRadius:5, marginTop:15, width:85, position:'absolute', backgroundColor:'red'}}>
+                        <Image
+                            style={{width: normalize(150 * .5), height: normalize(150 * .5)}}
+                            source={{uri: 'http://www.personalbrandingblog.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640-300x300.png'}}
+                        />
+                    </View>
+
+
+                </View>
                 {
                     this.state.data.length < 1
                         ?
@@ -181,7 +208,7 @@ class HomePage extends Component {
                             onRefresh={() => {
                                 this.onRefresh()
                             }}
-                            renderItem={({item}) => (
+                            renderItem={({item,index}) => (
                                 <View>
                                     <View style={{
                                         flex: 1,
@@ -191,7 +218,7 @@ class HomePage extends Component {
                                         backgroundColor: '#FFFFFF'
                                     }}>
                                         <View style={styles.box_parent}>
-
+                                            {console.log(index%2)}
                                             <View style={styles.box_child_image}>
                                                 <Image
                                                     style={{width: normalize(150 * .6), height: normalize(150 * .6)}}
