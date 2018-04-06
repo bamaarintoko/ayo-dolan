@@ -242,6 +242,20 @@ class HomePage extends Component {
                                                     }}>Kumpul di
                                                         ...</Text>
                                                 </View>
+                                                <View style={{flexDirection:'row',position: 'absolute', bottom: 0, marginBottom: 10, marginLeft:7}}>
+                                                    <View style={{flex: 1}}>
+                                                        <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
+                                                                    name="calendar-o"/></Text>
+                                                    </View>
+                                                    <View style={{flex: 1}}>
+                                                        <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
+                                                                    name="clock-o"/></Text>
+                                                    </View>
+                                                    <View style={{flex: 1}}>
+                                                        <Text><Icon color={'#000000'} size={normalizeFont(3 * .7)}
+                                                                    name="user"/></Text>
+                                                    </View>
+                                                </View>
                                             </RightImage>
                                     }
 
