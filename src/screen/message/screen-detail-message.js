@@ -56,6 +56,7 @@ class ViewDetailMessage extends Component {
                 senderId: this.props.redAuthCredential.data.user_id,
                 receiverId: this.props.navigation.state.params.id,
             });
+            console.log("as")
             // this.socket.emit('online')
         })
 
