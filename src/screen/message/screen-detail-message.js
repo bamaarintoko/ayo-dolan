@@ -7,8 +7,8 @@ import io from 'socket.io-client'
 import {Bubble, GiftedChat} from 'react-native-gifted-chat'
 import store from "react-native-simple-store";
 // import {url_} from "../../utils/Api";
-// let url = 'http://192.168.43.147:3010';
-let url = 'http://api.malaskoding.com:3010';
+let url = 'http://192.168.43.147:3010';
+// let url = 'http://api.malaskoding.com:3010';
 // let room = "1903";
 
 class ViewDetailMessage extends Component {
@@ -31,6 +31,15 @@ class ViewDetailMessage extends Component {
 
             }
         });
+        this.socket.on('connect', () => {
+            console.log("is connect")
+            this.socket.emit('init', {
+                senderId: this.props.redAuthCredential.data.user_id,
+                receiverId: this.props.navigation.state.params.id,
+            });
+            // console.log("as")
+            // this.socket.emit('online')
+        })
         this.renderBubble = this.renderBubble.bind(this)
         this.onSetMessage = this.onSetMessage.bind(this)
         this._storeMessages = this._storeMessages.bind(this)
@@ -50,16 +59,10 @@ class ViewDetailMessage extends Component {
     }
 
     componentDidMount() {
-        this.socket.on('connect', () => {
-            console.log("is connect")
-            this.socket.emit('init', {
-                senderId: this.props.redAuthCredential.data.user_id,
-                receiverId: this.props.navigation.state.params.id,
-            });
-            console.log("as")
-            // this.socket.emit('online')
-        })
 
+        this.socket.on('disconnect', () => {
+            console.log("Disconnected Socket!")
+        })
         // this.socket.emit('room', this.props.navigation.state.params.id);
     }
 
@@ -96,7 +99,8 @@ class ViewDetailMessage extends Component {
                 <Head
                     body={params.name}
                     leftIcon={'arrow-left'}
-                    leftPress={() => this.props.dispatch({type: 'Navigation/BACK'})}
+                    leftPress={() => {this.props.dispatch({type: 'Navigation/BACK'})
+                        this.socket.disconnect() }}
                     rightPress={() => this.props.navigation.navigate('DetailMessage')}
                 />
                 <GiftedChat
