@@ -45,7 +45,9 @@ class ViewDetailMessage extends Component {
         this._storeMessages = this._storeMessages.bind(this)
         // this.socket.on('message_',this.onSetMessage)
     }
-
+    dc(){
+        this.socket.emit('dc',this.props.redAuthCredential.data.user_id)
+    }
     onSetMessage(data){
         // console.log(data.text)
         this._storeMessages(data.text)
@@ -99,8 +101,9 @@ class ViewDetailMessage extends Component {
                 <Head
                     body={params.name}
                     leftIcon={'arrow-left'}
-                    leftPress={() => {this.props.dispatch({type: 'Navigation/BACK'})
-                        this.socket.disconnect() }}
+                    leftPress={
+                        () => {this.props.dispatch({type: 'Navigation/BACK'})
+                         this.dc()}}
                     rightPress={() => this.props.navigation.navigate('DetailMessage')}
                 />
                 <GiftedChat
