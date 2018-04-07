@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {View} from "react-native";
+import {BackHandler} from "react-native";
 import {Container, Content} from "native-base";
 import Head from "../../Components/Head";
 import io from 'socket.io-client'
@@ -10,7 +10,9 @@ import store from "react-native-simple-store";
 let url = 'http://192.168.43.147:3010';
 // let url = 'http://api.malaskoding.com:3010';
 // let room = "1903";
-
+// BackHandler.addEventListener('hardwareBackPress', ()=> {
+//     this.dc()
+// });
 class ViewDetailMessage extends Component {
     constructor(props) {
         super(props);
@@ -48,8 +50,8 @@ class ViewDetailMessage extends Component {
     dc(){
         this.socket.emit('dc',this.props.redAuthCredential.data.user_id)
     }
+
     onSetMessage(data){
-        // console.log(data.text)
         this._storeMessages(data.text)
     }
     _storeMessages(messages){
@@ -62,11 +64,15 @@ class ViewDetailMessage extends Component {
 
     componentDidMount() {
 
-        this.socket.on('disconnect', () => {
-            console.log("Disconnected Socket!")
+        BackHandler.addEventListener("hardwareBackPress", () => {
+            this.dc()
         })
-        // this.socket.emit('room', this.props.navigation.state.params.id);
     }
+
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress');
+    }
+
 
     renderBubble(props) {
         return (
