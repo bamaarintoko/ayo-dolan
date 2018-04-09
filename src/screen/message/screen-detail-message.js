@@ -20,10 +20,7 @@ class ViewDetailMessage extends Component {
         })
 
         this.socket.on('message', (message) => {
-            //if (this.props.navigation.state.params.id === message.senderId){
                 this.onSetMessage(message)
-
-            //}
         });
         this.socket.on('connect', () => {
             this.socket.emit('init', {
@@ -51,8 +48,6 @@ class ViewDetailMessage extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.navigation.state.params.email)
-        console.log(this.props.redAuthCredential.data.user_email)
         BackHandler.addEventListener("hardwareBackPress", () => {
             this.dc()
         })
