@@ -25,8 +25,8 @@ import HomeLoading from "../../Components/HomeLoading";
 import {LeftImage, RightImage} from "../../Components/List";
 
 // let url = '192.168.100.38:3010';
-let url = 'http://192.168.43.147:3010';
-// let url = 'http://api.malaskoding.com:3010';
+// let url = 'http://192.168.43.147:3010';
+let url = 'http://api.malaskoding.com:5000';
 const {width, height} = require('Dimensions').get('window');
 
 function mapStateToProps(state) {
@@ -126,7 +126,7 @@ class HomePage extends Component {
         })
         this.socket.emit('online_user', {myId: this.props.redAuthCredential.data.user_id, friendId: ['1', '2']})
         this.socket.on('connect_error', (err) => {
-            console.log("--->", err)
+            console.log("--->", err.message)
         })
         this.socket.on('disconnect', () => {
             console.log("Disconnected Socket!")

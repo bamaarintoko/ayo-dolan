@@ -6,7 +6,8 @@ import Head from "../../Components/Head";
 import io from 'socket.io-client'
 import {Bubble, GiftedChat} from 'react-native-gifted-chat'
 // import {url_} from "../../utils/Api";
-let url = 'http://192.168.43.147:3010';
+// let url = 'http://192.168.43.147:3010';
+let url = 'http://api.malaskoding.com:5000';
 class ViewDetailMessage extends Component {
     constructor(props) {
         super(props);
