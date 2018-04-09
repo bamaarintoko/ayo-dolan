@@ -56,7 +56,6 @@ class ViewMessage extends Component {
 
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log(this.props.redGetMessage)
         if (this.props.redGetMessage.status === prevState.initialRedGetMessage){
             this.setState({
                 data : this.props.redGetMessage.data
@@ -69,19 +68,14 @@ class ViewMessage extends Component {
 
     componentDidMount() {
         this.props.dispatch(actionGet('back/message/get_message', GET_MESSAGE,{user_id:this.props.redAuthCredential.data.user_id}))
-        // console.log(this.props.redGetUserId)
     }
 
 
     onBack(key,img,id,email) {
-        // setTimeout(() => {
-        //     this.props.navigation.navigate(key);
-        // }, 300);
         this.props.navigation.navigate('DetailMessage',{name:key,image:img,id:id,email:email})
     }
 
     render() {
-        console.log('---->',this.props.redGetUserId.data.toString())
         return (
             <Container>
                 <Head
