@@ -73,11 +73,11 @@ class ViewMessage extends Component {
     }
 
 
-    onBack(key,img,id) {
+    onBack(key,img,id,email) {
         // setTimeout(() => {
         //     this.props.navigation.navigate(key);
         // }, 300);
-        this.props.navigation.navigate('DetailMessage',{name:key,image:img,id:id})
+        this.props.navigation.navigate('DetailMessage',{name:key,image:img,id:id,email:email})
     }
 
     render() {
@@ -96,7 +96,7 @@ class ViewMessage extends Component {
                         renderRow={(item) => (
                             <List onPress={() => console.log('asu')}>
                                 <TouchableWithoutFeedback onPress={_.debounce(() =>
-                                    this.onBack(item.user_name,"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",item.user_id),300)
+                                    this.onBack(item.user_name,"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",item.user_id,item.user_email),300)
                                 }>
                                     <ListItem avatar>
                                         <Left>
