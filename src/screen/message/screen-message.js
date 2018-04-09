@@ -103,7 +103,7 @@ class ViewMessage extends Component {
                                             <Thumbnail source={{uri: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png"}}/>
                                         </Left>
                                         <Body>
-                                        <Text style={{fontSize:normalizeFont(3 * .7)}}>{item.user_name+", "+item.user_id}</Text>
+                                        <Text style={{fontSize:normalizeFont(3 * .7)}}>{item.user_name}</Text>
                                         <Text style={{fontSize:normalizeFont(3 * .6)}} note>Doing what you like will always keep you happy . .</Text>
                                         </Body>
                                         <Right>
