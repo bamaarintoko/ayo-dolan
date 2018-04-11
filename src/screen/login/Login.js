@@ -195,7 +195,7 @@ class Login extends Component {
                                 <View style={{flexDirection: 'row', alignItems: 'center', height: 40}}>
                                     <View style={{flex: 1}}>
                                         <TouchableWithoutFeedback style={{paddingTop: 10, paddingBottom: 10}}
-                                                                  onPress={() => console.log("asu")}>
+                                                                  onPress={() => this.props.navigation.navigate('Register')}>
                                             <Text style={{color: '#FFFFFF', fontSize: normalizeFont(4 * .5)}}>Create
                                                 Account</Text>
                                         </TouchableWithoutFeedback>
