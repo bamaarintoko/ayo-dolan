@@ -1,17 +1,17 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {StyleSheet, View, AsyncStorage, Image, StatusBar, TouchableWithoutFeedback} from "react-native";
-import {Button, Input, Item, Text} from "native-base";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { StyleSheet, View, AsyncStorage, Image, StatusBar, TouchableWithoutFeedback } from "react-native";
+import { Button, Input, Item, Text } from "native-base";
 // import { Field, reduxForm } from "redux-form";
 import Icon from 'react-native-vector-icons/FontAwesome';
 // import Modal from 'react-native-modal';
 import Spinner from 'react-native-spinkit';
 import md5 from 'crypto-js/md5';
 import Swiper from 'react-native-swiper'
-import {FBLogin, FBLoginManager} from 'react-native-facebook-login';
-import {normalize, normalizeFont} from "../../utils/func";
-import {Keyboard} from "react-native";
-import {actLogin} from "./action";
+import { FBLogin, FBLoginManager } from 'react-native-facebook-login';
+import { normalize, normalizeFont } from "../../utils/func";
+import { Keyboard } from "react-native";
+import { actLogin } from "./action";
 
 let styles = {
     wrapper: {},
@@ -113,7 +113,7 @@ class Login extends Component {
     }
     login = () => {
         this.setState({
-            isLoading:true
+            isLoading: true
         })
         FBLoginManager.loginWithPermissions(["email", "user_friends"], (error, data) => {
             if (!error) {
@@ -131,7 +131,7 @@ class Login extends Component {
                 // }
             } else {
                 this.setState({
-                    isLoading:false
+                    isLoading: false
                 })
                 console.log("Error: ", data);
             }
@@ -149,7 +149,7 @@ class Login extends Component {
                         barStyle="light-content"
                     />
                     <Text>Haloo</Text>
-                    <Spinner type='Circle' color={'#FFFFFF'}/>
+                    <Spinner type='Circle' color={'#FFFFFF'} />
                 </View>
                 <View style={styles.slide2}>
                     <Text>Halloo</Text>
@@ -163,51 +163,51 @@ class Login extends Component {
                     }}>
                         <Image
                             resizeMode={'contain'}
-                            style={{width: normalize(130 * .9)}}
+                            style={{ width: normalize(130 * .9) }}
                             source={require('../../utils/assetss/header.png')}
                         />
                     </View>
                     {
                         this.state.isLoading
                             ?
-                            <View style={{flex: 2, paddingLeft: 30, paddingRight: 30, justifyContent:'center', alignItems:'center'}}>
-                            <Spinner type='Circle' color={'#FFFFFF'}/>
+                            <View style={{ flex: 2, paddingLeft: 30, paddingRight: 30, justifyContent: 'center', alignItems: 'center' }}>
+                                <Spinner type='Circle' color={'#FFFFFF'} />
                             </View>
                             :
-                            <View style={{flex: 2, paddingLeft: 30, paddingRight: 30}}>
-                                <Item rounded style={{backgroundColor: '#FFFFFF'}}>
-                                    <View style={{width: 25}}>
-                                        <Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
-                                              name='envelope'/>
+                            <View style={{ flex: 2, paddingLeft: 30, paddingRight: 30 }}>
+                                <Item rounded style={{ backgroundColor: '#FFFFFF' }}>
+                                    <View style={{ width: 25 }}>
+                                        <Icon style={{ paddingLeft: 10 }} size={normalizeFont(4 * .5)} active
+                                            name='envelope' />
                                     </View>
                                     <Input onChangeText={this.onChange('username')}
-                                           style={{height: 40, fontSize: normalizeFont(4 * .5)}} placeholder='Email'/>
+                                        style={{ height: 40, fontSize: normalizeFont(4 * .5) }} placeholder='Email' />
                                 </Item>
-                                <Item style={{marginTop: 10, backgroundColor: '#FFFFFF'}} rounded>
-                                    <View style={{width: 25, alignItems: 'center'}}>
-                                        <Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)} active
-                                              name='lock'/>
+                                <Item style={{ marginTop: 10, backgroundColor: '#FFFFFF' }} rounded>
+                                    <View style={{ width: 25, alignItems: 'center' }}>
+                                        <Icon style={{ paddingLeft: 10 }} size={normalizeFont(4 * .5)} active
+                                            name='lock' />
                                     </View>
                                     <Input onChangeText={this.onChange('password')}
-                                           style={{height: 50, fontSize: normalizeFont(4 * .5)}}
-                                           placeholder='Password'/>
+                                        style={{ height: 50, fontSize: normalizeFont(4 * .5) }}
+                                        placeholder='Password' />
                                 </Item>
-                                <View style={{flexDirection: 'row', alignItems: 'center', height: 40}}>
-                                    <View style={{flex: 1}}>
-                                        <TouchableWithoutFeedback style={{paddingTop: 10, paddingBottom: 10}}
-                                                                  onPress={() => this.props.navigation.navigate('Register')}>
-                                            <Text style={{color: '#FFFFFF', fontSize: normalizeFont(4 * .5)}}>Create
+                                <View style={{ flexDirection: 'row', alignItems: 'center', height: 40 }}>
+                                    <TouchableWithoutFeedback
+                                        onPress={() => this.props.navigation.navigate('Register')}>
+                                        <View style={{ flex: 1, height: 40, justifyContent: 'center' }}>
+                                            <Text style={{ color: '#FFFFFF', fontSize: normalizeFont(4 * .5) }}>Create
                                                 Account</Text>
-                                        </TouchableWithoutFeedback>
 
-                                    </View>
-                                    <View style={{flex: 1, alignItems: 'flex-end'}}>
-                                        <TouchableWithoutFeedback style={{paddingTop: 10, paddingBottom: 10}}
-                                                                  onPress={() => console.log("asu")}>
-                                            <Text style={{color: '#FFFFFF', fontSize: normalizeFont(4 * .5)}}>Forgot
+                                        </View>
+                                    </TouchableWithoutFeedback>
+                                    <TouchableWithoutFeedback style={{ paddingTop: 10, paddingBottom: 10 }}
+                                        onPress={() => console.log("asu")}>
+                                        <View style={{ flex: 1, alignItems: 'flex-end', height: 40, justifyContent:'center' }}>
+                                            <Text style={{ color: '#FFFFFF', fontSize: normalizeFont(4 * .5) }}>Forgot
                                                 Password?</Text>
-                                        </TouchableWithoutFeedback>
-                                    </View>
+                                        </View>
+                                    </TouchableWithoutFeedback>
                                 </View>
                                 <Button onPress={this.onLogin} small block info>
                                     <Text>Login</Text>
@@ -217,19 +217,19 @@ class Login extends Component {
                                     &&
                                     <View>
                                         <View style={styles.separatorContainer}>
-                                            <View style={styles.separatorLine}/>
+                                            <View style={styles.separatorLine} />
                                             <Text style={styles.separatorOr}>Or Login With</Text>
-                                            <View style={styles.separatorLine}/>
+                                            <View style={styles.separatorLine} />
                                         </View>
-                                        <View style={{flex: 1, flexDirection: 'row'}}>
-                                            <View style={{flex: 1}}>
+                                        <View style={{ flex: 1, flexDirection: 'row' }}>
+                                            <View style={{ flex: 1 }}>
                                                 <Button onPress={this.login}
-                                                        style={{marginTop: 2, backgroundColor: '#3b5998'}}
-                                                        small
-                                                        block info>
-                                                    <Text><Icon style={{paddingLeft: 10}} size={normalizeFont(4 * .5)}
-                                                                active
-                                                                name='facebook'/></Text>
+                                                    style={{ marginTop: 2, backgroundColor: '#3b5998' }}
+                                                    small
+                                                    block info>
+                                                    <Text><Icon style={{ paddingLeft: 10 }} size={normalizeFont(4 * .5)}
+                                                        active
+                                                        name='facebook' /></Text>
                                                 </Button>
                                             </View>
                                         </View>
