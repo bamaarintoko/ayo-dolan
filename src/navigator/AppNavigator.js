@@ -9,6 +9,7 @@ import ViewDetailMessage from '../screen/message/screen-detail-message'
 import ViewSetting from '../screen/setting/screen-setting'
 import ViewEditPassword from '../screen/setting/edit_password/screen-edit-password'
 import ViewEditProfile from '../screen/setting/edit_profil/screen-edit-profil'
+import ViewRegister from '../screen/register/screen-register'
 // import screenAdd from '../screen/home/screen_add'
 // import screenDetail from '../screen/detail/screen_detail'
 // import screenAddDet from '../screen/detail/screen_add_det'
@@ -71,7 +72,7 @@ export const AppNavigator = StackNavigator({
     Splash: {screen: screenSplash},
     Login: {screen: LoginScreen},
     Setting: {screen: ViewSetting},
-    // // Menu: {screen: AppDrawer},
+    Register: {screen: ViewRegister},
     Menu: {screen: sideBar},
     // Add: {screen: screenAdd},
     DetailMessage: {screen: ViewDetailMessage},
